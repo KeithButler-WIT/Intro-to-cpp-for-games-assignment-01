@@ -323,7 +323,7 @@ int main()
 			// player.update(dtAsSeconds, Mouse::getPosition());
 			player.update(dtAsSeconds);
 
-			turret.update(Mouse::getPosition(), player.getCenter());
+			turret.update(zombies[1].getCenter(), player.getCenter());
 
 			// Make a note of the players new position
 			Vector2f playerPosition(player.getCenter());
@@ -337,6 +337,7 @@ int main()
 				if (zombies[i].isAlive())
 				{
 					zombies[i].update(dt.asSeconds(), playerPosition);
+					turret.update(zombies[i].getCenter(), player.getCenter());
 				}
 			}
 

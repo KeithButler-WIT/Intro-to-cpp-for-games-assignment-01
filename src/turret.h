@@ -38,7 +38,7 @@ public:
 
 	// Called every frame
 	// void update(float elapsedTime, Vector2i mousePosition);
-	void update(Vector2i mousePosition, Vector2f playerPosition);
+	void update(Vector2f targetPosition, Vector2f playerPosition);
 
 	// Give turret a damage boost used for levelling up
 	void upgradeDamage();

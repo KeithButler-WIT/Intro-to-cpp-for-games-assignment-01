@@ -1,9 +1,3 @@
-//
-//  zombie.h
-//  Zombie Arena
-//
-//
-
 #ifndef zombie_hpp
 #define zombie_hpp
 

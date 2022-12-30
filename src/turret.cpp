@@ -33,11 +33,12 @@ void Turret::resetTurretStats()
 }
 
 // void Turret::update(float elapsedTime, Vector2i mousePosition)
-void Turret::update(Vector2i mousePosition, Vector2f playerPosition)
+void Turret::update(Vector2f targetPosition, Vector2f playerPosition)
+
 {
 	// Calculate the angle to face the enemy
-	float angle = (atan2(mousePosition.y - m_Resolution.y / 2,
-					   mousePosition.x - m_Resolution.x / 2)
+	float angle = (atan2(targetPosition.y - m_Resolution.y / 2,
+					   targetPosition.x - m_Resolution.x / 2)
 					  * 180)
 		/ 3.141;
 
