@@ -1,9 +1,17 @@
 #include "bullet.h"
+#include "textureHolder.h"
 
 // The constructor
 Bullet::Bullet()
 {
-	m_BulletShape.setSize(Vector2f(2, 2));
+	// Associate a texture with the sprite
+	setSprite(Sprite(TextureHolder::GetTexture("content/graphics/Tiles/tile_0103.png")));
+	m_Sprite = getSprite();
+
+	// Set the origin of the sprite to the centre for smooth rotation
+	m_Sprite.setOrigin(8, 8);
+
+	// m_BulletShape.setSize(Vector2f(2, 2));
 }
 
 void Bullet::shoot(float startX, float startY, float targetX, float targetY)
@@ -50,7 +58,7 @@ void Bullet::shoot(float startX, float startY, float targetX, float targetY)
 	m_MaxY = startY + range;
 
 	// Position the bullet ready to be drawn
-	m_BulletShape.setPosition(m_Position);
+	m_Sprite.setPosition(m_Position);
 }
 
 void Bullet::stop()
@@ -63,25 +71,14 @@ bool Bullet::isInFlight()
 	return m_InFlight;
 }
 
-FloatRect Bullet::getPosition()
-{
-	return m_BulletShape.getGlobalBounds();
-}
-
-RectangleShape Bullet::getShape()
-{
-	return m_BulletShape;
-}
-
 void Bullet::update(float elapsedTime)
 {
-
 	// Update the bullet position variables
 	m_Position.x += m_BulletDistanceX * elapsedTime;
 	m_Position.y += m_BulletDistanceY * elapsedTime;
 
 	// Move the bullet
-	m_BulletShape.setPosition(m_Position);
+	m_Sprite.setPosition(m_Position);
 
 	// Has the bullet gone out of range?
 	if (m_Position.x < m_MinX || m_Position.x > m_MaxX || m_Position.y < m_MinY || m_Position.y > m_MaxY)

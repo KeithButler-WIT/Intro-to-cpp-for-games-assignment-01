@@ -379,7 +379,7 @@ int main()
 			{
 				if (turret.getBullet(i).isInFlight())
 				{
-					window.draw(turret.getBullet(i).getShape());
+					window.draw(turret.getBullet(i).getSprite());
 				}
 			}
 

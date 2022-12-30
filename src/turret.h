@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-class Turret : public Entity, public Bullet
+class Turret : virtual public Entity, virtual public Bullet
 {
 private:
 	const float START_DAMAGE = 1;
@@ -15,7 +15,7 @@ private:
 	// An array of bullets.  100 bullets should do
 	Bullet m_Bullets[100];
 	int m_BurrentBullet = 0;
-	int m_BulletsSpare = 24;
+	int m_BulletsSpare = 90;
 	int m_CurrentBullet = 0;
 	int m_FireRate = 1;
 
@@ -45,6 +45,7 @@ public:
 
 	float getDamage();
 
+	// Returns a bullet at the index bulletNum
 	Bullet getBullet(int bulletNum);
 };
 

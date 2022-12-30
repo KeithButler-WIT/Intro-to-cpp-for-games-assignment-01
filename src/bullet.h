@@ -1,20 +1,19 @@
-//
-//  bullet.hpp
 #ifndef bullet_hpp
 #define bullet_hpp
 
+#include "entity.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-class Bullet
+class Bullet : virtual public Entity
 {
 private:
 	// Where is the bullet?
 	Vector2f m_Position;
 
 	// What each bullet looks like
-	RectangleShape m_BulletShape;
+	// RectangleShape m_BulletShape;
 
 	// Is this bullet currently whizzing through the air?
 	bool m_InFlight = false;
@@ -50,12 +49,6 @@ public:
 	// Launch a new bullet
 	void shoot(float startX, float startY,
 		float xTarget, float yTarget);
-
-	// Tell the calling code where the bullet is in the world
-	FloatRect getPosition();
-
-	// Return the actual shape (for drawing)
-	RectangleShape getShape();
 
 	// Update the bullet each frame
 	void update(float elapsedTime);
