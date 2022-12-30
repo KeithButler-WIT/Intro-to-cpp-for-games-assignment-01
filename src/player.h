@@ -13,15 +13,6 @@ private:
 	const float START_DASH_SPEED = 800;
 	const float START_HEALTH = 100;
 
-	// Where is the player?
-	// Vector2f m_Position;
-
-	// Player sprite
-	// Sprite m_Sprite;
-
-	// Player texture
-	// Texture m_Texture;
-
 	// What is the screen resolution?
 	Vector2f m_Resolution;
 
@@ -67,15 +58,6 @@ public:
 	// How long since player hit?
 	Time getLastHitTime();
 
-	// Where is the player?
-	// FloatRect getPosition();
-	// Where is the centre of the player?
-	// Vector2f getCenter();
-	// Which angle is the player facing?
-	// float getRotation();
-
-	// Send a copy of the sprite to main
-	// Sprite getSprite();
 	// How much health has the player currently got?
 	int getHealth();
 
@@ -108,4 +90,5 @@ public:
 	// Increase health  collision with med kit
 	void increaseHealthLevel(int amount);
 };
+
 #endif /* player_hpp */

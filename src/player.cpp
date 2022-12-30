@@ -66,26 +66,6 @@ bool Player::hit(Time timeHit)
 	}
 }
 
-// FloatRect Player::getPosition()
-// {
-// 	return m_Sprite.getGlobalBounds();
-// }
-
-// Vector2f Player::getCenter()
-// {
-// 	return m_Position;
-// }
-
-// float Player::getRotation()
-// {
-// 	return m_Sprite.getRotation();
-// }
-
-// Sprite Player::getSprite()
-// {
-// 	return m_Sprite;
-// }
-
 int Player::getHealth()
 {
 	return m_Health;
@@ -139,7 +119,6 @@ void Player::stopDash()
 // void Player::update(float elapsedTime, Vector2i mousePosition)
 void Player::update(float elapsedTime)
 {
-
 	if (m_UpPressed)
 	{
 		if (m_DashPressed)

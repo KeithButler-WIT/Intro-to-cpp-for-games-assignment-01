@@ -1,7 +1,8 @@
 #include "zombieArena.h"
 #include "bullet.h"
-#include "player.h" // or hpp if using Xcode
+#include "player.h"
 #include "textureHolder.h"
+#include "turret.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -41,6 +42,9 @@ int main()
 
 	// Create an instance of the Player class
 	Player player;
+
+	// Create an instance of the Turret class
+	Turret turret;
 
 	// The boundaries of the arena
 	IntRect arena;
@@ -189,7 +193,11 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::Space))
 			{
 				player.startDash();
-				// player.stopDash();
+				if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000)
+				{
+					player.stopDash();
+					lastPressed = gameTimeTotal;
+				}
 			}
 			else
 			{
@@ -198,7 +206,8 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::F))
 			{
 				// TODO
-				// Spawn turret at players location
+				// Spawn the turret at players location
+				turret.spawn(player.getCenter(), resolution);
 
 			} //End if (event.key.code == Keyboard::F)
 
@@ -261,8 +270,8 @@ int main()
 			if (state == State::PLAYING)
 			{
 				// Prepare the level – we will update this later
-				arena.width = 16000;
-				arena.height = 16000;
+				arena.width = 160;
+				arena.height = 160;
 				arena.left = 0;
 				arena.top = 0;
 				//int tileSize = 50; // we will update this later
@@ -313,6 +322,8 @@ int main()
 			// Update the player
 			// player.update(dtAsSeconds, Mouse::getPosition());
 			player.update(dtAsSeconds);
+
+			turret.update(Mouse::getPosition());
 
 			// Make a note of the players new position
 			Vector2f playerPosition(player.getCenter());
@@ -371,6 +382,10 @@ int main()
 					window.draw(bullets[i].getShape());
 				}
 			}
+
+			// Draw the turret
+			// window.draw(Sprite(TextureHolder::GetTexture("content/graphics/Tiles/turret_base.png")));
+			window.draw(turret.getSprite());
 
 			// Draw the player
 			window.draw(player.getSprite());

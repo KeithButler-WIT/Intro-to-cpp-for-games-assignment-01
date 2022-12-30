@@ -1,44 +1,39 @@
-#ifndef TURRET_H_
-#define TURRET_H_
+#ifndef turret_h
+#define turret_h
 
+#include "bullet.h"
 #include "entity.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-// class Turret : public Entity
-// {
-// private:
-// 	// What is the screen resolution?
-// 	Vector2f m_Resolution;
+class Turret : public Entity, public Bullet
+{
+private:
+	const float START_DAMAGE = 1;
 
-// 	// How big is the current arena?
-// 	IntRect m_Arena;
+	// What is the screen resolution?
+	Vector2f m_Resolution;
 
-// 	// How big is each tile of the arena?
-// 	int m_TileSize;
+	// Damage the turret can do
+	float m_Damage;
 
-// public:
-// 	Turret();
+public:
+	Turret();
 
-// 	void spawn(IntRect arena, Vector2f resolution, int tileSize);
+	void spawn(Vector2f playerPosition, Vector2f resolution);
 
-// 	// Called at end of game
-// 	void resetTurretStats();
+	// Called at end of game
+	void resetTurretStats();
 
-// 	// Called every frame
-// 	void update(float elapsedTime);
+	// Called every frame
+	// void update(float elapsedTime, Vector2i mousePosition);
+	void update(Vector2i mousePosition);
 
-// 	// Give turret a damage boost used for levelling up
-// 	void upgradeDamage();
-// };
+	// Give turret a damage boost used for levelling up
+	void upgradeDamage();
 
-// // Calculate the angle to face the enemy
-// float angle = (atan2(targetPosition.y - m_Resolution.y / 2,
-// 				   targetPosition.x - m_Resolution.x / 2)
-// 				  * 180)
-// 	/ 3.141;
-
-// m_Sprite.setRotation(angle);
+	float getDamage();
+};
 
 #endif // TURRET_H_

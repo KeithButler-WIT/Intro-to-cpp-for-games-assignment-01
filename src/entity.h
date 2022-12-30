@@ -25,6 +25,8 @@ public:
 
 	// Where is the player?
 	FloatRect getPosition();
+	//
+	// void setPosition(Vector2f position);
 	// Where is the centre of the player?
 	Vector2f getCenter();
 	// Which angle is the player facing?

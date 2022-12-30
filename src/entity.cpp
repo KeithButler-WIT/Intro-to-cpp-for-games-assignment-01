@@ -16,6 +16,11 @@ FloatRect Entity::getPosition()
 	return m_Sprite.getGlobalBounds();
 }
 
+// void Entity::setPosition(Vector2f position)
+// {
+// 	m_Position = position;
+// }
+
 // Where is the centre of the entity?
 Vector2f Entity::getCenter()
 {
