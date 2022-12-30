@@ -4,6 +4,7 @@
 
 Turret::Turret()
 {
+
 	m_Damage = START_DAMAGE;
 
 	// Associate a texture with the sprite
@@ -33,7 +34,7 @@ void Turret::resetTurretStats()
 }
 
 // void Turret::update(float elapsedTime, Vector2i mousePosition)
-void Turret::update(Vector2i mousePosition)
+void Turret::update(Vector2i mousePosition, Vector2f playerPosition)
 {
 	m_Sprite.setPosition(Entity::m_Position);
 
@@ -44,6 +45,24 @@ void Turret::update(Vector2i mousePosition)
 		/ 3.141;
 
 	m_Sprite.setRotation(angle);
+
+	if (currentShotTime.asMilliseconds() - lastShotTime.asMilliseconds() > 1000 / m_FireRate && m_BulletsSpare > 0)
+	{
+		if (m_BulletsSpare > 0)
+		{
+			// Pass the centre of the turret and the centre of the target to the shoot function
+			m_Bullets[m_CurrentBullet].shoot(getCenter().x, getCenter().y, playerPosition.x, playerPosition.y);
+			m_CurrentBullet++;
+
+			if (m_CurrentBullet > 99)
+			{
+				m_CurrentBullet = 0;
+			}
+
+			lastShotTime = currentShotTime;
+			m_BulletsSpare--;
+		}
+	}
 }
 
 void Turret::upgradeDamage()
@@ -54,4 +73,12 @@ void Turret::upgradeDamage()
 float Turret::getDamage()
 {
 	return m_Damage;
+}
+
+Bullet Turret::getBullet(int bulletNum)
+{
+	// if (bulletNum > 99 || bulletNum < 0)
+	// 	return Null;
+	// else
+	return m_Bullets[bulletNum];
 }

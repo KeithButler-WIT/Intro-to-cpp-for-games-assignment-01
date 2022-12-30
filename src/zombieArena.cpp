@@ -61,12 +61,12 @@ int main()
 	Zombie* zombies = nullptr;
 
 	// An array of bullets.  100 bullets should do
-	Bullet bullets[100];
-	int currentBullet = 0;
-	int bulletsSpare = 24;
-	int bulletsInClip = 6;
-	int clipSize = 6;
-	float fireRate = 1;
+	// Bullet bullets[100];
+	// int currentBullet = 0;
+	// int bulletsSpare = 24;
+	// int bulletsInClip = 6;
+	// int clipSize = 6;
+	// float fireRate = 1;
 	// When was the fire button last pressed?
 	Time lastPressed;
 
@@ -118,26 +118,26 @@ int main()
 				if (state == State::PLAYING)
 				{
 
-					// Reloading
-					if (event.key.code == Keyboard::R)
-					{
-						if (bulletsSpare >= clipSize)
-						{
-							// Plenty of bullets. Reload.
-							bulletsInClip = clipSize;
-							bulletsSpare -= clipSize;
-						}
-					}
-					else if (bulletsSpare > 0)
-					{
-						// Only few bullets left
-						bulletsInClip = bulletsSpare;
-						bulletsSpare = 0;
-					}
-					else
-					{
-						// More here later reload failed sound
-					}
+					// // Reloading
+					// if (event.key.code == Keyboard::R)
+					// {
+					// 	if (bulletsSpare >= clipSize)
+					// 	{
+					// 		// Plenty of bullets. Reload.
+					// 		bulletsInClip = clipSize;
+					// 		bulletsSpare -= clipSize;
+					// 	}
+					// }
+					// else if (bulletsSpare > 0)
+					// {
+					// 	// Only few bullets left
+					// 	bulletsInClip = bulletsSpare;
+					// 	bulletsSpare = 0;
+					// }
+					// else
+					// {
+					// 	// More here later reload failed sound
+					// }
 
 				} //End if (event.key.code == Keyboard::R)
 			}	  //End if (event.type == Event::KeyPressed)
@@ -193,7 +193,7 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::Space))
 			{
 				player.startDash();
-				if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000)
+				if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 1)
 				{
 					player.stopDash();
 					lastPressed = gameTimeTotal;
@@ -214,20 +214,20 @@ int main()
 			// Fire a bullet
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate && bulletsInClip > 0)
-				{
-					// Pass the centre of the player and the centre of the cross-hair to the shoot function
-					bullets[currentBullet].shoot(player.getCenter().x, player.getCenter().y, mouseWorldPosition.x, mouseWorldPosition.y);
-					currentBullet++;
+				// if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate && bulletsInClip > 0)
+				// {
+				// 	// Pass the centre of the player and the centre of the cross-hair to the shoot function
+				// 	bullets[currentBullet].shoot(player.getCenter().x, player.getCenter().y, mouseWorldPosition.x, mouseWorldPosition.y);
+				// 	currentBullet++;
 
-					if (currentBullet > 99)
-					{
-						currentBullet = 0;
-					}
+				// 	if (currentBullet > 99)
+				// 	{
+				// 		currentBullet = 0;
+				// 	}
 
-					lastPressed = gameTimeTotal;
-					bulletsInClip--;
-				}
+				// 	lastPressed = gameTimeTotal;
+				// 	bulletsInClip--;
+				// }
 			} // End fire a bullet
 
 		} // End WASD while playing
@@ -323,7 +323,7 @@ int main()
 			// player.update(dtAsSeconds, Mouse::getPosition());
 			player.update(dtAsSeconds);
 
-			turret.update(Mouse::getPosition());
+			turret.update(Mouse::getPosition(), player.getCenter());
 
 			// Make a note of the players new position
 			Vector2f playerPosition(player.getCenter());
@@ -343,9 +343,9 @@ int main()
 			// Update any bullets that are in-flight
 			for (int i = 0; i < 100; i++)
 			{
-				if (bullets[i].isInFlight())
+				if (turret.getBullet(i).isInFlight())
 				{
-					bullets[i].update(dtAsSeconds);
+					turret.getBullet(i).update(dtAsSeconds);
 				}
 			}
 
@@ -377,9 +377,9 @@ int main()
 			// Draw the bullets
 			for (int i = 0; i < 100; i++)
 			{
-				if (bullets[i].isInFlight())
+				if (turret.getBullet(i).isInFlight())
 				{
-					window.draw(bullets[i].getShape());
+					window.draw(turret.getBullet(i).getShape());
 				}
 			}
 
