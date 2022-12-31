@@ -38,6 +38,8 @@ void Turret::spawn(Vector2f playerPosition, Vector2f resolution)
 void Turret::resetTurretStats()
 {
 	m_Damage = START_DAMAGE;
+	m_CurrentBullet = 0;
+	m_BulletsSpare = START_MAX_BULLETS;
 }
 
 // void Turret::update(Vector2i targetPosition)
@@ -77,9 +79,7 @@ float Turret::getDamage()
 
 Bullet Turret::getBullet(int bulletNum)
 {
-	// if (bulletNum > 99 || bulletNum < 0)
-	// 	return Null;
-	// else
+	// TODO error checking
 	return m_Bullets[bulletNum];
 }
 
@@ -87,4 +87,10 @@ void Turret::upgradeDamage()
 {
 	// 20% speed upgrade
 	m_Damage += (START_DAMAGE * .2);
+}
+
+void Turret::resetBullets()
+{
+	m_CurrentBullet = 0;
+	m_BulletsSpare = START_MAX_BULLETS;
 }

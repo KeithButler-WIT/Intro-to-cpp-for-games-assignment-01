@@ -120,7 +120,7 @@ int main()
 						{
 							if (player.checkCollision(zombies[i]))
 							{
-								player.stopDash();
+								// player.stopDash();
 								// add point
 							}
 						}
@@ -129,6 +129,7 @@ int main()
 						if (player.checkCollision(turret))
 						{
 							// reload turret when dashed through
+							turret.resetBullets();
 						}
 
 						lastPressed = gameTimeTotal;
