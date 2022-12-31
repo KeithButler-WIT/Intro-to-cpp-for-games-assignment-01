@@ -16,7 +16,6 @@ Bullet::Bullet()
 
 void Bullet::shoot(float startX, float startY, float targetX, float targetY)
 {
-
 	// Keep track of the bullet
 	m_InFlight = true;
 	m_Position.x = startX;
@@ -50,7 +49,7 @@ void Bullet::shoot(float startX, float startY, float targetX, float targetY)
 		m_BulletDistanceY *= -1;
 	}
 
-	// Set a max range of 1000 pixels from player
+	// Set a max range of 1000 pixels from target
 	float range = 1000;
 	m_MinX = startX - range;
 	m_MaxX = startX + range;

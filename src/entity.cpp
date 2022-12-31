@@ -11,7 +11,7 @@ Entity::Entity()
 }
 
 // Where is the entity?
-FloatRect Entity::getPosition()
+FloatRect Entity::getPosition() const
 {
 	return m_Sprite.getGlobalBounds();
 }
@@ -22,18 +22,18 @@ FloatRect Entity::getPosition()
 // }
 
 // Where is the centre of the entity?
-Vector2f Entity::getCenter()
+Vector2f Entity::getCenter() const
 {
 	return m_Position;
 }
 // Which angle is the entity facing?
 
-float Entity::getRotation()
+float Entity::getRotation() const
 {
 	return m_Sprite.getRotation();
 }
 // Send a copy of the sprite to main
-Sprite Entity::getSprite()
+Sprite Entity::getSprite() const
 {
 	return m_Sprite;
 }
@@ -42,4 +42,15 @@ void Entity::setSprite(Sprite sprite)
 {
 	//TODO error checking etc
 	m_Sprite = sprite;
+}
+
+bool Entity::checkCollision(Entity obj)
+{
+	m_Collision = false; // defaults to no collision at first
+	if (m_Sprite.getGlobalBounds().intersects(obj.getPosition()))
+	{
+		return true;
+	}
+
+	return false;
 }

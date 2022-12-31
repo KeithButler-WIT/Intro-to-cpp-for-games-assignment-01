@@ -14,10 +14,11 @@ private:
 
 	// An array of bullets.  100 bullets should do
 	Bullet m_Bullets[100];
-	int m_BurrentBullet = 0;
-	int m_BulletsSpare = 90;
 	int m_CurrentBullet = 0;
+	int m_BulletsSpare = 90;
 	int m_FireRate = 1;
+
+	bool m_IsPlaced = false;
 
 	Time currentShotTime;
 	Time lastShotTime;
@@ -37,16 +38,16 @@ public:
 	void resetTurretStats();
 
 	// Called every frame
-	// void update(float elapsedTime, Vector2i mousePosition);
-	void update(Vector2f targetPosition, Vector2f playerPosition);
-
-	// Give turret a damage boost used for levelling up
-	void upgradeDamage();
+	// void update(Vector2i targetPosition);
+	void update(Vector2f targetPosition);
 
 	float getDamage();
 
 	// Returns a bullet at the index bulletNum
 	Bullet getBullet(int bulletNum);
+
+	// Increase damage used for levelling up
+	void upgradeDamage();
 };
 
 #endif // TURRET_H_

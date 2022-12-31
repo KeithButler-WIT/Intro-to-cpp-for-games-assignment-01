@@ -16,15 +16,23 @@ Turret::Turret()
 
 void Turret::spawn(Vector2f playerPosition, Vector2f resolution)
 {
+	// If turret already placed don't move it
+	// if (m_IsPlaced)
+	// {
+	// 	return;
+	// }
+
 	// Place the turret at the players position
 	Entity::m_Position.x = playerPosition.x;
 	Entity::m_Position.y = playerPosition.y;
 
-	// setPosition(m_Position);
+	m_Sprite.setPosition(Entity::m_Position);
 
 	// Store the resolution for future use
 	m_Resolution.x = resolution.x;
 	m_Resolution.y = resolution.y;
+
+	m_IsPlaced = true;
 }
 
 void Turret::resetTurretStats()
@@ -32,9 +40,8 @@ void Turret::resetTurretStats()
 	m_Damage = START_DAMAGE;
 }
 
-// void Turret::update(float elapsedTime, Vector2i mousePosition)
-void Turret::update(Vector2f targetPosition, Vector2f playerPosition)
-
+// void Turret::update(Vector2i targetPosition)
+void Turret::update(Vector2f targetPosition)
 {
 	// Calculate the angle to face the enemy
 	float angle = (atan2(targetPosition.y - m_Resolution.y / 2,
@@ -46,28 +53,21 @@ void Turret::update(Vector2f targetPosition, Vector2f playerPosition)
 
 	if (currentShotTime.asMilliseconds() - lastShotTime.asMilliseconds() > 1000 / m_FireRate && m_BulletsSpare > 0)
 	{
-		if (m_BulletsSpare > 0)
+		// Pass the centre of the turret and the centre of the target to the shoot function
+		m_Bullets[m_CurrentBullet].shoot(Entity::getCenter().x, Entity::getCenter().y, targetPosition.x, targetPosition.y);
+		m_Bullets[m_CurrentBullet].getSprite().setRotation(angle);
+		m_CurrentBullet++;
+
+		if (m_CurrentBullet > 99)
 		{
-			// Pass the centre of the turret and the centre of the target to the shoot function
-			m_Bullets[m_CurrentBullet].shoot(Entity::getCenter().x, Entity::getCenter().y, playerPosition.x, playerPosition.y);
-			m_CurrentBullet++;
-
-			if (m_CurrentBullet > 99)
-			{
-				m_CurrentBullet = 0;
-			}
-
-			lastShotTime = currentShotTime;
-			m_BulletsSpare--;
+			m_CurrentBullet = 0;
 		}
+
+		lastShotTime = currentShotTime;
+		m_BulletsSpare--;
 	}
 
 	Entity::m_Sprite.setPosition(Entity::m_Position);
-}
-
-void Turret::upgradeDamage()
-{
-	m_Damage *= 2;
 }
 
 float Turret::getDamage()
@@ -81,4 +81,10 @@ Bullet Turret::getBullet(int bulletNum)
 	// 	return Null;
 	// else
 	return m_Bullets[bulletNum];
+}
+
+void Turret::upgradeDamage()
+{
+	// 20% speed upgrade
+	m_Damage += (START_DAMAGE * .2);
 }

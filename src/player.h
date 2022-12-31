@@ -10,8 +10,9 @@ class Player : public Entity
 {
 private:
 	const float START_SPEED = 200;
-	const float START_DASH_SPEED = 800;
+	const float START_DASH_SPEED = 600;
 	const float START_HEALTH = 100;
+	const int START_LEVEL = 1;
 
 	// What is the screen resolution?
 	Vector2f m_Resolution;
@@ -45,6 +46,9 @@ private:
 
 	// Dash distance in pixels per second
 	float m_DashSpeed;
+
+	// Number of times the player leveled up
+	int m_Level;
 
 public:
 	Player();
@@ -81,6 +85,9 @@ public:
 	// void update(float elapsedTime, Vector2i mousePosition);
 	void update(float elapsedTime);
 
+	// Increase dash distance used for levelling up
+	void upgradeDash();
+
 	// Give player a speed boost used for levelling up
 	void upgradeSpeed();
 
@@ -89,6 +96,10 @@ public:
 
 	// Increase health  collision with med kit
 	void increaseHealthLevel(int amount);
+
+	// adds 1 to the players level
+	void increaseLevel();
+	int getLevel() const;
 };
 
 #endif /* player_hpp */

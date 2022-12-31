@@ -20,21 +20,26 @@ protected:
 	// Speed in pixels per second
 	float m_Speed;
 
+	// True if collision happened
+	bool m_Collision;
+
 public:
 	Entity();
 
 	// Where is the player?
-	FloatRect getPosition();
+	FloatRect getPosition() const;
 	//
 	// void setPosition(Vector2f position);
 	// Where is the centre of the player?
-	Vector2f getCenter();
+	Vector2f getCenter() const;
 	// Which angle is the player facing?
-	float getRotation();
+	float getRotation() const;
 	// Send a copy of the sprite to main
-	Sprite getSprite();
+	Sprite getSprite() const;
 	// Set the sprite
 	void setSprite(Sprite sprite);
+
+	bool checkCollision(Entity Obj);
 };
 
 #endif // TURRET_H_

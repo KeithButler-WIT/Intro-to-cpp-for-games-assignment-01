@@ -8,6 +8,7 @@ Player::Player()
 	m_DashSpeed = START_DASH_SPEED;
 	m_Health = START_HEALTH;
 	m_MaxHealth = START_HEALTH;
+	m_Level = START_LEVEL;
 
 	m_DashPressed = false;
 
@@ -45,6 +46,8 @@ void Player::resetPlayerStats()
 	m_Speed = START_SPEED;
 	m_Health = START_HEALTH;
 	m_MaxHealth = START_HEALTH;
+	m_DashSpeed = START_DASH_SPEED;
+	m_Level = START_SPEED;
 }
 
 Time Player::getLastHitTime()
@@ -182,6 +185,12 @@ void Player::update(float elapsedTime)
 	// m_Sprite.setRotation(angle);
 }
 
+void Player::upgradeDash()
+{
+	// 20% speed upgrade
+	m_DashSpeed += (START_DASH_SPEED * .2);
+}
+
 void Player::upgradeSpeed()
 {
 	// 20% speed upgrade
@@ -203,4 +212,14 @@ void Player::increaseHealthLevel(int amount)
 	{
 		m_Health = m_MaxHealth;
 	}
+}
+
+void Player::increaseLevel()
+{
+	m_Level++;
+}
+
+int Player::getLevel() const
+{
+	return m_Level;
 }

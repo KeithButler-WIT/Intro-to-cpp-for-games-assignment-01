@@ -1,9 +1,11 @@
 #include "zombieArena.h"
-#include "bullet.h"
 #include "player.h"
 #include "textureHolder.h"
 #include "turret.h"
 #include <SFML/Graphics.hpp>
+#include <chrono>
+#include <iostream>
+#include <thread>
 
 using namespace sf;
 
@@ -60,13 +62,6 @@ int main()
 	// int numZombiesAlive = 0; // Number to be killed
 	Zombie* zombies = nullptr;
 
-	// An array of bullets.  100 bullets should do
-	// Bullet bullets[100];
-	// int currentBullet = 0;
-	// int bulletsSpare = 24;
-	// int bulletsInClip = 6;
-	// int clipSize = 6;
-	// float fireRate = 1;
 	// When was the fire button last pressed?
 	Time lastPressed;
 
@@ -117,6 +112,36 @@ int main()
 
 				if (state == State::PLAYING)
 				{
+					// TODO fix dash
+					// Dash
+					if (event.key.code == Keyboard::Space)
+					// if (event.key.code == Keyboard::Space && gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 2)
+					// if (std::future::wait_for(100ms) == std::future_status::ready)
+					{
+						player.startDash();
+						// check for collision with a zombie
+
+						// std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+						// player.stopDash();
+
+						for (int i = 0; i < numZombies; i++)
+						{
+							if (player.checkCollision(zombies[i]))
+							{
+								player.stopDash();
+								// add point
+							}
+						}
+
+						// check for collision with Turret
+						if (player.checkCollision(turret))
+						{
+							// reload turret when dashed through
+						}
+
+						lastPressed = gameTimeTotal;
+
+					} //End if (event.key.code == Keyboard::Space)
 
 					// // Reloading
 					// if (event.key.code == Keyboard::R)
@@ -143,6 +168,9 @@ int main()
 			}	  //End if (event.type == Event::KeyPressed)
 
 		} // End event polling
+
+		if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 3)
+			player.stopDash();
 
 		// Handle the player quitting
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -189,20 +217,20 @@ int main()
 			{
 				player.stopRight();
 			}
-			// Dash
-			if (Keyboard::isKeyPressed(Keyboard::Space))
-			{
-				player.startDash();
-				if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 1)
-				{
-					player.stopDash();
-					lastPressed = gameTimeTotal;
-				}
-			}
-			else
-			{
-				player.stopDash();
-			} //End if (event.key.code == Keyboard::Space)
+			// // Dash
+			// if (Keyboard::isKeyPressed(Keyboard::Space))
+			// {
+			// 	player.startDash();
+			// 	// if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 1)
+			// 	// {
+			// 	// player.stopDash();
+			// 	// lastPressed = gameTimeTotal;
+			// 	// }
+			// }
+			// else
+			// {
+			// 	player.stopDash();
+			// } //End if (event.key.code == Keyboard::Space)
 			if (Keyboard::isKeyPressed(Keyboard::F))
 			{
 				// TODO
@@ -239,21 +267,29 @@ int main()
 			// Handle the player levelling up
 			if (event.key.code == Keyboard::Num1)
 			{
+				// increase turret damage
+				turret.upgradeDamage();
 				state = State::PLAYING;
 			}
 
 			if (event.key.code == Keyboard::Num2)
 			{
+				// increase dash distance
+				player.upgradeDash();
 				state = State::PLAYING;
 			}
 
 			if (event.key.code == Keyboard::Num3)
 			{
+				// increase run speed
+				player.upgradeSpeed();
 				state = State::PLAYING;
 			}
 
 			if (event.key.code == Keyboard::Num4)
 			{
+				// increase player health
+				player.upgradeHealth();
 				state = State::PLAYING;
 			}
 
@@ -270,11 +306,11 @@ int main()
 			if (state == State::PLAYING)
 			{
 				// Prepare the level – we will update this later
-				arena.width = 160;
-				arena.height = 160;
-				arena.left = 0;
-				arena.top = 0;
+				rArena.width = 1600;
+				rArena.height = 1600;
+				rArena.left = 0;
 				//int tileSize = 50; // we will update this later
+				rArena.top = 0;
 
 				// Pass the vertex array by reference to the createBackground function
 				int tileSize = createBackground(background, rArena);
@@ -323,7 +359,7 @@ int main()
 			// player.update(dtAsSeconds, Mouse::getPosition());
 			player.update(dtAsSeconds);
 
-			turret.update(zombies[1].getCenter(), player.getCenter());
+			// turret.update(zombies[1].getCenter());
 
 			// Make a note of the players new position
 			Vector2f playerPosition(player.getCenter());
@@ -331,13 +367,17 @@ int main()
 			// Make the view centre around the player
 			mainView.setCenter(player.getCenter());
 
+			// Convert mouse position to world coordinates of mainView
 			// Loop through each Zombie and update them if alive
 			for (int i = 0; i < numZombies; i++)
 			{
 				if (zombies[i].isAlive())
 				{
 					zombies[i].update(dt.asSeconds(), playerPosition);
-					turret.update(zombies[i].getCenter(), player.getCenter());
+					// FloatRect zombieWorldPosition = zombies[i].getPosition();
+					// Vector2f zombieWorldPosition = window.mapPixelToCoords(zombies[i].getCenter());
+					// turret.update(zombieWorldPosition);
+					turret.update(zombies[i].getCenter());
 				}
 			}
 
