@@ -49,8 +49,16 @@ bool Entity::checkCollision(Entity obj)
 	m_Collision = false; // defaults to no collision at first
 	if (m_Sprite.getGlobalBounds().intersects(obj.getPosition()))
 	{
+		m_Collision = true;
 		return true;
 	}
 
 	return false;
+}
+
+// TODO
+// BUG Error prone
+bool Entity::isColliding()
+{
+	return m_Collision;
 }

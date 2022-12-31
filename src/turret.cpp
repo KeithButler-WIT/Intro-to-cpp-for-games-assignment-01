@@ -5,6 +5,8 @@
 Turret::Turret()
 {
 	m_Damage = START_DAMAGE;
+	m_BulletsSpare = START_MAX_BULLETS;
+	m_FireRate = START_FIRE_RATE;
 
 	// Associate a texture with the sprite
 	Entity::setSprite(Sprite(TextureHolder::GetTexture("content/graphics/Tiles/tile_0074.png")));
@@ -14,7 +16,7 @@ Turret::Turret()
 	Entity::m_Sprite.setOrigin(8, 8);
 }
 
-void Turret::spawn(Vector2f playerPosition, Vector2f resolution)
+void Turret::spawn(Vector2f playerPosition)
 {
 	// If turret already placed don't move it
 	// if (m_IsPlaced)
@@ -28,10 +30,6 @@ void Turret::spawn(Vector2f playerPosition, Vector2f resolution)
 
 	m_Sprite.setPosition(Entity::m_Position);
 
-	// Store the resolution for future use
-	m_Resolution.x = resolution.x;
-	m_Resolution.y = resolution.y;
-
 	m_IsPlaced = true;
 }
 
@@ -40,6 +38,7 @@ void Turret::resetTurretStats()
 	m_Damage = START_DAMAGE;
 	m_CurrentBullet = 0;
 	m_BulletsSpare = START_MAX_BULLETS;
+	m_FireRate = START_FIRE_RATE;
 }
 
 // void Turret::update(Vector2i targetPosition)
@@ -60,7 +59,7 @@ void Turret::update(Vector2f targetPosition)
 		m_Bullets[m_CurrentBullet].getSprite().setRotation(angle);
 		m_CurrentBullet++;
 
-		if (m_CurrentBullet > 99)
+		if (m_CurrentBullet > START_MAX_BULLETS)
 		{
 			m_CurrentBullet = 0;
 		}
@@ -85,8 +84,14 @@ Bullet Turret::getBullet(int bulletNum)
 
 void Turret::upgradeDamage()
 {
-	// 20% speed upgrade
+	// 20% damage upgrade
 	m_Damage += (START_DAMAGE * .2);
+}
+
+void Turret::upgradeFireRate()
+{
+	// 2x fireRate upgrade
+	m_FireRate += (START_FIRE_RATE * 2);
 }
 
 void Turret::resetBullets()

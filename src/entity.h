@@ -39,7 +39,11 @@ public:
 	// Set the sprite
 	void setSprite(Sprite sprite);
 
+	// Checks for collision with an object of type Entity
 	bool checkCollision(Entity Obj);
+
+	// checks if colliding with any object
+	bool isColliding();
 };
 
 #endif // TURRET_H_

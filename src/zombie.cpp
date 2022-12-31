@@ -56,7 +56,7 @@ bool Zombie::hit()
 	{
 		// if the zombie is dead
 		m_Alive = false;
-		m_Sprite.setTexture(TextureHolder::GetTexture("content/graphics/blood.png"));
+		m_Sprite.setTexture(TextureHolder::GetTexture("content/graphics/Tiles/tile_0064.png"));
 
 		return true;
 	}
@@ -72,8 +72,8 @@ bool Zombie::isAlive()
 
 void Zombie::update(float elapsedTime, Vector2f playerLocation)
 {
-	float playerX = playerLocation.x;
-	float playerY = playerLocation.y;
+	float playerX = playerLocation.x + 16.0f;
+	float playerY = playerLocation.y + 16.0f;
 
 	// Update the zombie position variables
 	if (playerX > m_Position.x)

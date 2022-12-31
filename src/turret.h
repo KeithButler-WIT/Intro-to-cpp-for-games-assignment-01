@@ -12,12 +12,13 @@ class Turret : virtual public Entity, virtual public Bullet
 private:
 	const float START_DAMAGE = 1;
 	const int START_MAX_BULLETS = 99;
+	const int START_FIRE_RATE = 1;
 
 	// An array of bullets.  100 bullets should do
 	Bullet m_Bullets[100];
 	int m_CurrentBullet = 0;
-	int m_BulletsSpare = START_MAX_BULLETS;
-	int m_FireRate = 1;
+	int m_BulletsSpare;
+	int m_FireRate;
 
 	bool m_IsPlaced = false;
 
@@ -33,7 +34,8 @@ private:
 public:
 	Turret();
 
-	void spawn(Vector2f playerPosition, Vector2f resolution);
+	// void spawn(Vector2f playerPosition, Vector2f resolution);
+	void spawn(Vector2f playerPosition);
 
 	// Called at end of game
 	void resetTurretStats();
@@ -49,6 +51,9 @@ public:
 
 	// Increase damage used for levelling up
 	void upgradeDamage();
+
+	// Increase fireRate used for levelling up
+	void upgradeFireRate();
 
 	// Reloads the turret by resetting the current bullet to 0 and spare to max
 	void resetBullets();

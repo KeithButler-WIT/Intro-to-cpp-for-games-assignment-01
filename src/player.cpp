@@ -69,6 +69,14 @@ bool Player::hit(Time timeHit)
 	}
 }
 
+bool Player::isAlive()
+{
+	if (m_Health > 0)
+		return true;
+
+	return false;
+}
+
 int Player::getHealth()
 {
 	return m_Health;
@@ -117,6 +125,11 @@ void Player::startDash()
 void Player::stopDash()
 {
 	m_DashPressed = false;
+}
+
+bool Player::isDashing()
+{
+	return m_DashPressed;
 }
 
 // void Player::update(float elapsedTime, Vector2i mousePosition)

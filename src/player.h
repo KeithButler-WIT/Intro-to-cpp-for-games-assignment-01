@@ -9,7 +9,7 @@ using namespace sf;
 class Player : public Entity
 {
 private:
-	const float START_SPEED = 200;
+	const float START_SPEED = 100;
 	const float START_DASH_SPEED = 600;
 	const float START_HEALTH = 100;
 	const int START_LEVEL = 1;
@@ -34,7 +34,6 @@ private:
 
 	// How much health has the player got?
 	int m_Health;
-
 	// What is the maximum health the player can have?
 	int m_MaxHealth;
 
@@ -59,6 +58,8 @@ public:
 	void resetPlayerStats();
 	// Handle the player getting hit by a zombie
 	bool hit(Time timeHit);
+	// check if the player is dead or not
+	bool isAlive();
 	// How long since player hit?
 	Time getLastHitTime();
 
@@ -80,6 +81,7 @@ public:
 	// Jump the player a set distance in the movement direction
 	void startDash();
 	void stopDash();
+	bool isDashing();
 
 	// Called every frame
 	// void update(float elapsedTime, Vector2i mousePosition);
@@ -87,16 +89,12 @@ public:
 
 	// Increase dash distance used for levelling up
 	void upgradeDash();
-
 	// Give player a speed boost used for levelling up
 	void upgradeSpeed();
-
 	// Increase max health  used for levelling up
 	void upgradeHealth();
-
 	// Increase health  collision with med kit
 	void increaseHealthLevel(int amount);
-
 	// adds 1 to the players level
 	void increaseLevel();
 	int getLevel() const;
