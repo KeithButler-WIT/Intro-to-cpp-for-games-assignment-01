@@ -3,9 +3,6 @@
 #include "textureHolder.h"
 #include "turret.h"
 #include <SFML/Graphics.hpp>
-#include <chrono>
-#include <iostream>
-#include <thread>
 
 using namespace sf;
 
@@ -115,14 +112,9 @@ int main()
 					// TODO fix dash
 					// Dash
 					if (event.key.code == Keyboard::Space)
-					// if (event.key.code == Keyboard::Space && gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 2)
-					// if (std::future::wait_for(100ms) == std::future_status::ready)
 					{
 						player.startDash();
 						// check for collision with a zombie
-
-						// std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-						// player.stopDash();
 
 						for (int i = 0; i < numZombies; i++)
 						{
@@ -169,6 +161,7 @@ int main()
 
 		} // End event polling
 
+		// Stops the player dashing after a set time
 		if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / 3)
 			player.stopDash();
 
