@@ -14,7 +14,7 @@ private:
 	const int START_MAX_BULLETS = 99;
 	const int START_FIRE_RATE = 1;
 
-	// An array of bullets.  100 bullets should do
+	// An array of bullets
 	Bullet m_Bullets[100];
 	int m_CurrentBullet = 0;
 	int m_BulletsSpare;
@@ -22,7 +22,7 @@ private:
 
 	bool m_IsPlaced = false;
 
-	Time currentShotTime;
+	// When the last shot was taken
 	Time lastShotTime;
 
 	// What is the screen resolution?
@@ -35,14 +35,14 @@ public:
 	Turret();
 
 	// void spawn(Vector2f playerPosition, Vector2f resolution);
-	void spawn(Vector2f playerPosition);
+	void spawn(Vector2f playerPosition, Vector2f resolution);
 
 	// Called at end of game
 	void resetTurretStats();
 
 	// Called every frame
 	// void update(Vector2i targetPosition);
-	void update(Vector2f targetPosition);
+	void update(Time gameTimeTotal, Vector2f targetPosition);
 
 	float getDamage();
 

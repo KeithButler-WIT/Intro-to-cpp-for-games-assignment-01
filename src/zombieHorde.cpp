@@ -1,8 +1,3 @@
-//
-//  zombieHorde.cpp
-//  Zombie Arena
-//
-
 #include "zombie.h"
 #include "zombieArena.h"
 

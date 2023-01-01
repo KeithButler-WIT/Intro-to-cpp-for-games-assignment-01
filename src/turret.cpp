@@ -4,6 +4,8 @@
 
 Turret::Turret()
 {
+	Time currentShotTime;
+	Time lastShotTime;
 	m_Damage = START_DAMAGE;
 	m_BulletsSpare = START_MAX_BULLETS;
 	m_FireRate = START_FIRE_RATE;
@@ -16,7 +18,7 @@ Turret::Turret()
 	Entity::m_Sprite.setOrigin(8, 8);
 }
 
-void Turret::spawn(Vector2f playerPosition)
+void Turret::spawn(Vector2f playerPosition, Vector2f resolution)
 {
 	// If turret already placed don't move it
 	// if (m_IsPlaced)
@@ -30,6 +32,10 @@ void Turret::spawn(Vector2f playerPosition)
 
 	m_Sprite.setPosition(Entity::m_Position);
 
+	// Store the resolution for future use
+	m_Resolution.x = resolution.x;
+	m_Resolution.y = resolution.y;
+
 	m_IsPlaced = true;
 }
 
@@ -42,7 +48,7 @@ void Turret::resetTurretStats()
 }
 
 // void Turret::update(Vector2i targetPosition)
-void Turret::update(Vector2f targetPosition)
+void Turret::update(Time gameTimeTotal, Vector2f targetPosition)
 {
 	// Calculate the angle to face the enemy
 	float angle = (atan2(targetPosition.y - m_Resolution.y / 2,
@@ -52,7 +58,7 @@ void Turret::update(Vector2f targetPosition)
 
 	Entity::m_Sprite.setRotation(angle);
 
-	if (currentShotTime.asMilliseconds() - lastShotTime.asMilliseconds() > 1000 / m_FireRate && m_BulletsSpare > 0)
+	if (gameTimeTotal.asMilliseconds() - lastShotTime.asMilliseconds() > 1000 / m_FireRate && m_BulletsSpare > 0)
 	{
 		// Pass the centre of the turret and the centre of the target to the shoot function
 		m_Bullets[m_CurrentBullet].shoot(Entity::getCenter().x, Entity::getCenter().y, targetPosition.x, targetPosition.y);
@@ -64,7 +70,7 @@ void Turret::update(Vector2f targetPosition)
 			m_CurrentBullet = 0;
 		}
 
-		lastShotTime = currentShotTime;
+		lastShotTime = gameTimeTotal;
 		m_BulletsSpare--;
 	}
 

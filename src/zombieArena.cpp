@@ -107,7 +107,7 @@ int main()
 	Text gameOverText;
 	gameOverText.setFont(font);
 	gameOverText.setCharacterSize(125);
-	gameOverText.setFillColor(sf::Color::Black);
+	gameOverText.setFillColor(sf::Color::White);
 	gameOverText.setString("Press Enter to play");
 
 	FloatRect gameOverRect = gameOverText.getLocalBounds();
@@ -119,7 +119,7 @@ int main()
 	levelUpText.setFont(font);
 	levelUpText.setCharacterSize(80);
 	levelUpText.setFillColor(Color::Black);
-	levelUpText.setPosition(150, 250);
+	levelUpText.setPosition(resolution.x / 2, resolution.y / 2);
 	std::stringstream levelUpStream;
 	levelUpStream << "1- Increased damage"
 				  << "\n2- Increased rate of fire"
@@ -203,37 +203,37 @@ int main()
 
 	// // Prepare the splat sound
 	// SoundBuffer splatBuffer;
-	// splatBuffer.loadFromFile("sound/splat.wav");
+	// splatBuffer.loadFromFile("content/sound/splat.wav");
 	// sf::Sound splat;
 	// splat.setBuffer(splatBuffer);
 
 	// // Prepare the shoot sound
 	// SoundBuffer shootBuffer;
-	// shootBuffer.loadFromFile("sound/shoot.wav");
+	// shootBuffer.loadFromFile("content/sound/shoot.wav");
 	// Sound shoot;
 	// shoot.setBuffer(shootBuffer);
 
 	// // Prepare the reload sound
 	// SoundBuffer reloadBuffer;
-	// reloadBuffer.loadFromFile("sound/reload.wav");
+	// reloadBuffer.loadFromFile("content/sound/reload.wav");
 	// Sound reload;
 	// reload.setBuffer(reloadBuffer);
 
 	// // Prepare the failed sound
 	// SoundBuffer reloadFailedBuffer;
-	// reloadFailedBuffer.loadFromFile("sound/reload_failed.wav");
+	// reloadFailedBuffer.loadFromFile("content/sound/reload_failed.wav");
 	// Sound reloadFailed;
 	// reloadFailed.setBuffer(reloadFailedBuffer);
 
 	// Prepare the powerup sound
 	// SoundBuffer powerupBuffer;
-	// powerupBuffer.loadFromFile("sound/powerup.wav");
+	// powerupBuffer.loadFromFile("content/sound/powerup.wav");
 	// Sound powerup;
 	// powerup.setBuffer(powerupBuffer);
 
 	// Prepare the pickup sound
 	// SoundBuffer pickupBuffer;
-	// pickupBuffer.loadFromFile("sound/pickup.wav");
+	// pickupBuffer.loadFromFile("content/sound/pickup.wav");
 	// Sound pickup;
 	// pickup.setBuffer(pickupBuffer);
 
@@ -325,27 +325,6 @@ int main()
 						}
 
 					} //End if (event.key.code == Keyboard::Space)
-
-					// // Reloading
-					// if (event.key.code == Keyboard::R)
-					// {
-					// 	if (bulletsSpare >= clipSize)
-					// 	{
-					// 		// Plenty of bullets. Reload.
-					// 		bulletsInClip = clipSize;
-					// 		bulletsSpare -= clipSize;
-					// 	}
-					// }
-					// else if (bulletsSpare > 0)
-					// {
-					// 	// Only few bullets left
-					// 	bulletsInClip = bulletsSpare;
-					// 	bulletsSpare = 0;
-					// }
-					// else
-					// {
-					// 	// More here later reload failed sound
-					// }
 
 				} //End if (event.key.code == Keyboard::R)
 			}	  //End if (event.type == Event::KeyPressed)
@@ -465,28 +444,9 @@ int main()
 			{
 				// TODO
 				// Spawn the turret at players location
-				turret.spawn(player.getCenter());
+				turret.spawn(player.getCenter(), resolution);
 
 			} //End if (event.key.code == Keyboard::F)
-
-			// Fire a bullet
-			// if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			// {
-			// if (gameTimeTotal.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate && bulletsInClip > 0)
-			// {
-			// 	// Pass the centre of the player and the centre of the cross-hair to the shoot function
-			// 	bullets[currentBullet].shoot(player.getCenter().x, player.getCenter().y, mouseWorldPosition.x, mouseWorldPosition.y);
-			// 	currentBullet++;
-
-			// 	if (currentBullet > 99)
-			// 	{
-			// 		currentBullet = 0;
-			// 	}
-
-			// 	lastPressed = gameTimeTotal;
-			// 	bulletsInClip--;
-			// }
-			// } // End fire a bullet
 
 		} // End WASD while playing
 
@@ -526,6 +486,12 @@ int main()
 			{
 				// increase player health
 				player.upgradeHealth();
+				state = State::PLAYING;
+			}
+
+			if (event.key.code == Keyboard::Num6)
+			{
+				// increase total allowed turrets
 				state = State::PLAYING;
 			}
 
@@ -588,17 +554,25 @@ int main()
 
 			// Convert mouse position to world coordinates of mainView
 			// Loop through each Zombie and update them if alive
+			bool hasTarget = false;
 			for (int i = 0; i < numZombies; i++)
 			{
 				if (zombies[i].isAlive())
 				{
 					zombies[i].update(dt.asSeconds(), playerPosition);
+					if (hasTarget)
+						break;
+					hasTarget = true;
 					// FloatRect zombieWorldPosition = zombies[i].getPosition();
 					// Vector2f zombieWorldPosition = window.mapPixelToCoords(zombies[i].getCenter());
 					// turret.update(zombieWorldPosition);
-					turret.update(zombies[i].getCenter());
+					turret.update(gameTimeTotal, zombies[i].getCenter());
 				}
-				continue;
+				// else if (hasTarget)
+				else
+				{
+					hasTarget = false;
+				}
 			}
 
 			// Update any bullets that are in-flight
@@ -689,8 +663,6 @@ int main()
 
 			window.setView(HudView);
 			// Draw all the HUD elements
-			// window.draw(scoreText);
-			// window.draw(hiScoreText);
 			window.draw(healthBar);
 			// window.draw(waveNumberText);
 			// window.draw(zombiesRemainingText);
