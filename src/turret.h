@@ -16,7 +16,7 @@ private:
 
 	// An array of bullets
 	Bullet m_Bullets[100];
-	int m_CurrentBullet = 0;
+	int m_CurrentBullet;
 	int m_BulletsSpare;
 	int m_FireRate;
 

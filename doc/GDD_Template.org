@@ -1,0 +1,222 @@
+#+title: Game Design Document
+#+subtitle: More words
+#+date: 2022-09-26 Mon
+#+EXPORT_FILE_NAME: ./GDD.pdf
+#+options: toc:nil title:nil
+
+* Title Page :ignore:
+#+begin_export latex
+\newcommand{\gameName}{Turret Divert}
+\newcommand{\shortDescription}{Manveur around hordes of enemies using using well timed dodges.}
+
+\begin{titlepage}
+\begin{center}
+\title {
+    Game Design Document
+    \\
+    \vspace{7cm}
+    {\huge \gameName}
+}
+
+\maketitle
+\nopar\noindent\rule{\textwidth}{0.4pt}
+\begin{center}\shortDescription\end{center}
+\nopar\noindent\rule{\textwidth}{0.4pt}
+\vspace{15mm}
+
+\end{center}
+\end{titlepage}
+#+end_export
+
+* Table of Contents :toc:
+- [[#title-page][Title Page]]
+- [[#game-overview][Game Overview]]
+  - [[#concept][Concept]]
+  - [[#feature-set][Feature Set]]
+  - [[#genres][Genres]]
+  - [[#target-audience][Target Audience]]
+  - [[#game-flow-summary---how-does-the-player-move-through-the-game-both-through-framing-interface-and-the-game-itself][Game Flow Summary - How does the player move through the game? Both through framing interface and the game itself.]]
+  - [[#look-and-feel][Look and Feel]]
+  - [[#project-scope][Project Scope]]
+  - [[#unique-selling-point][Unique Selling Point]]
+- [[#gameplay-and-mechanics][Gameplay and mechanics]]
+  - [[#gameplay][Gameplay]]
+  - [[#mechanics][Mechanics]]
+  - [[#screen-flow][Screen Flow]]
+- [[#story-setting-and-character][Story, Setting and Character]]
+  - [[#game-world][Game World]]
+  - [[#characters][Characters]]
+- [[#levels][Levels]]
+  - [[#level-1][Level 1]]
+- [[#interface][Interface]]
+  - [[#visual-system][Visual System]]
+  - [[#control-system---how-does-the-game-player-control-the-game-what-are-the-specific-commands][Control System - How does the game player control the game? What are the specific commands?]]
+  - [[#audio][Audio]]
+  - [[#music][Music]]
+  - [[#sound-effects][Sound Effects]]
+- [[#artificial-intelligence][Artificial Intelligence]]
+  - [[#enemy-ai][Enemy AI]]
+  - [[#turret-ai][Turret AI]]
+- [[#technical][Technical]]
+  - [[#target-hardware][Target Hardware]]
+  - [[#development-hardware-and-software][Development hardware and software]]
+  - [[#development-procedures-and-standards][Development procedures and standards]]
+  - [[#scripting-language][Scripting Language]]
+- [[#game-art][Game Art]]
+  - [[#concept-art][Concept Art]]
+  - [[#style-guides][Style Guides]]
+  - [[#characters-1][Characters]]
+  - [[#enviroment][Enviroment]]
+  - [[#equipment][Equipment]]
+  - [[#cut-scenes][Cut Scenes]]
+  - [[#miscellaneous][Miscellaneous]]
+- [[#project-management][Project Management]]
+  - [[#version-control][Version control]]
+  - [[#test-plan][Test Plan]]
+- [[#appendices][Appendices]]
+  - [[#credits-list-all-third-party-assets-used-in-your-game-group-them-according-to-type][Credits: List ALL third-party assets used in your game. Group them according to type:]]
+  - [[#art][Art]]
+  - [[#references-use-the-harvard-method-to-format-references-for-all-in-text-citations][References. Use the Harvard method to format references for all in-text citations]]
+
+* Game Overview
+# The very basic idea of the game
+** Concept
+An endless wave survival where the player cannot directly control attacking the enemies and has to rely on turrets to kill the enemies.
+** Feature Set
+** Genres
+Top down wave survival shooter
+** Target Audience
+
+Main target audiences of the game and reasoning why game attracts certain audiences.
+** Game Flow Summary - How does the player move through the game? Both through framing interface and the game itself.
+The player can explore a large flat arena.
+** Look and Feel
+Pixel art graphics.
+** Project Scope
+*** 1 location
+*** 1 level
+*** No NPC's
+*** One kind of turret
+*** Player has no access to weapons and is out of control of attacking any enemies.
+
+** Unique Selling Point
+What makes this game stand out?
+
+* Gameplay and mechanics
+** Gameplay
+*** Game Progression
+*** Objectives
+Survive for as long as possible.
+*** Play Flow - How does the game flow for the game player
+The player
+** Mechanics
+*** Physics - How does the physical universe work?
+*** Movement
+**** General Movement
+WASD controls
+**** Dash
+- The players main form of movement.
+- Can dash through enemies without taking damage.
+***** Keybinding : SPACE
+
+*** Objects
+**** Picking Up Objects
+**** Moving Objects
+*** Actions
+**** Switches and Buttons
+**** Picking up, Carrying and Dropping
+*** Combat
+Player dosen't have direct control over attacking the enemies.
+
+** Screen Flow
+*** Screen Flow Chart - A Graphical description of How each screen is related to each other
+*** Screen Descriptions - What is the purpose of each screen?
+**** Main Menu Screen
+**** Options Screen
+**** Etc.
+*** Game Options - What are the options and how do they affect gameplay and mechanics?
+*** Replaying and saving
+
+* Story, Setting and Character
+** Game World
+*** Genral look and feel of the world
+*** Area 1
+**** General Description
+**** Phyical Characteristics
+**** Levels that use area
+**** Connections to other areas
+** Characters
+*** Character 1
+**** Back Story
+**** Personality
+**** Look
+***** Physical Characteristics
+***** Animations
+**** Special Abilities
+**** Relevance to game story
+**** Relationship to other characters
+**** Statistics
+
+* Levels
+** Level 1
+*** Synopsis
+*** Introductory Material ( Cut scene? Mission briefing? )
+*** Objectives
+Survive for as long as possible against waves of enemies.
+*** Physical Description
+*** Map
+*** Critial Path
+*** Encounters
+*** Level Walkthrough
+*** Closing Material
+* Interface
+** Visual System
+*** HUD - What controls
+*** Menus
+*** Rendering System
+*** Camera
+*** Lighting Models
+** Control System - How does the game player control the game? What are the specific commands?
+** Audio
+
+** Music
+** Sound Effects
+
+* Artificial Intelligence
+** Enemy AI
+The active opponent that chases down the player on mass and therefore requires strategic decisions making.
+** Turret AI
+*** Player Collision detection
+*** No Pathfinding
+* Technical
+** Target Hardware
+** Development hardware and software
+** Development procedures and standards
+** Scripting Language
+C++
+SFML
+* Game Art
+** Concept Art
+** Style Guides
+** Characters
+** Enviroment
+** Equipment
+** Cut Scenes
+** Miscellaneous
+
+* Project Management
+** Version control
+Git/Github
+** Test Plan
+* Appendices
+- [[https://github.com/viirret/gdd-template/blob/main/main.tex][gdd-template/main.tex at main · viirret/gdd-template · GitHub]]
+** Credits: List ALL third-party assets used in your game. Group them according to type:
+*** Images
+*** Models
+*** Animations
+*** Audio
+*** Cameras
+*** Player controllers
+*** Etc.
+** Art
+** References. Use the Harvard method to format references for all in-text citations

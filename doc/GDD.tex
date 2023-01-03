@@ -1,0 +1,405 @@
+% Created 2023-01-02 Mon 22:32
+% Intended LaTeX compiler: pdflatex
+\documentclass[article, 11pt]{article}
+                      \usepackage{lmodern} % Ensures we have the right font
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[table, xcdraw]{xcolor}
+\usepackage{listings}
+\definecolor{bblue}{HTML}{0645AD}
+\usepackage[colorlinks]{hyperref}
+\hypersetup{colorlinks, linkcolor=blue, urlcolor=bblue}
+\usepackage{titling}
+\setlength{\droptitle}{-6em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\usepackage[stretch=10]{microtype}
+\usepackage{hyphenat}
+\usepackage{ragged2e}
+\usepackage{subfig} % Subfigures (not needed in Org I think)
+\usepackage{hyperref} % Links
+\usepackage{listings} % Code highlighting
+\usepackage[top=1in, bottom=1.25in, left=1.55in, right=1.55in]{geometry}
+\renewcommand{\baselinestretch}{1.15}
+\usepackage[explicit]{titlesec}
+\pretitle{\begin{center}\fontsize{20pt}{20pt}\selectfont}
+\posttitle{\par\end{center}}
+\preauthor{\begin{center}\vspace{-6bp}\fontsize{14pt}{14pt}\selectfont}
+\postauthor{\par\end{center}\vspace{-25bp}}
+\predate{\begin{center}\fontsize{12pt}{12pt}\selectfont}
+\postdate{\par\end{center}\vspace{0em}}
+\titlespacing\section{0pt}{5pt}{5pt} % left margin, space before section header, space after section header
+\titlespacing\subsection{0pt}{5pt}{-2pt} % left margin, space before subsection header, space after subsection header
+\titlespacing\subsubsection{0pt}{5pt}{-2pt} % left margin, space before subsection header, space after subsection header
+\usepackage{enumitem}
+\setlist{itemsep=-2pt} % or \setlist{noitemsep} to leave space around whole list
+\titleformat{\section} {\Large}{\thesection}{1em}{\textbf{#1}} % Section header formatting
+\titlespacing\section{0pt}{5pt}{-5pt} % left margin, space before section header, space after section header
+\titleformat{\subsection} {\large}{\thesubsection}{1em}{\textbf{#1}}
+\titlespacing\subsection{0pt}{5pt}{-5pt} % left margin, space before subsection header, space after subsection header
+\titleformat{\subsubsection} {\large}{\thesubsubsection}{1em}{#1}
+\titlespacing\subsubsection{0pt}{5pt}{-5pt} % left margin, space before subsection header, space after subsection header
+\author{Keith Butler}
+\date{2022-09-26 Mon}
+\title{Game Design Document\\\medskip
+\large More words}
+\begin{document}
+
+
+\newcommand{\gameName}{Fancy Name}
+\newcommand{\shortDescription}{Short description of the game}
+
+\begin{titlepage}
+\begin{center}
+\title {
+    Game Design Document
+    \\
+    \vspace{7cm}
+    {\huge \gameName}
+}
+
+\maketitle
+\nopar\noindent\rule{\textwidth}{0.4pt}
+\begin{center}\shortDescription\end{center}
+\nopar\noindent\rule{\textwidth}{0.4pt}
+\vspace{15mm}
+
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\section{Game Overview}
+\label{sec:org28b3e93}
+\subsection{Concept}
+\label{sec:orgf00c6ca}
+
+Introduction of the concept.
+\subsection{Feature Set}
+\label{sec:org8b4b075}
+\subsection{Genres}
+\label{sec:org5731449}
+Top down twin stick shooter
+\subsection{Target Audience}
+\label{sec:orgc224b84}
+
+Main target audiences of the game and reasoning why game attracts certain audiences.
+\subsection{Game Flow Summary - How does the player move through the game? Both through framing interface and the game itself.}
+\label{sec:orgeb3b559}
+\subsection{Look and Feel - What is the basic look and feel of the game? What is the visual style? Give examples}
+\label{sec:org5c2b2d1}
+Briefly explaining how the game looks and feels.
+\subsection{Project Scope - A Summary of the scope of the game.}
+\label{sec:org7bbcfe3}
+\subsubsection{Number of locations}
+\label{sec:orgce2caf4}
+\subsubsection{Number of levels}
+\label{sec:org60de23d}
+\subsubsection{Number of NPC's}
+\label{sec:orgc00d0c8}
+\subsubsection{Number of  weapons}
+\label{sec:org12090dc}
+\subsubsection{Etc.}
+\label{sec:orgcc0498b}
+\subsection{Unique Selling Point}
+\label{sec:orge9d0199}
+What makes this game stand out?
+
+\section{Gameplay and mechanics}
+\label{sec:org41212f7}
+\subsection{Gameplay}
+\label{sec:org7a82921}
+\subsubsection{Game Progression}
+\label{sec:orgc3f6270}
+\subsubsection{Mission/Challenge Structure}
+\label{sec:org840efdc}
+\subsubsection{Puzzle Structure}
+\label{sec:org8d815d2}
+\subsubsection{Objectives - What are the objectives of the game?}
+\label{sec:org7425bf5}
+\subsubsection{Play Flow - How does the game flow for the game player}
+\label{sec:orgbdeb225}
+\subsection{Mechanics - What are the rules to the game, both implicit nad explicit? This is the model of the unvierse that the game works under. Think of it as a simulation of the world, how do all the pieces interact? This actually can be a very large section}
+\label{sec:org7241c87}
+\subsubsection{Physics - How does the physical universe work?}
+\label{sec:orgee72f77}
+\subsubsection{Movement}
+\label{sec:org322f010}
+\begin{enumerate}
+\item General Movement
+\label{sec:org55d12da}
+\item Other Movement
+\label{sec:org887facf}
+\end{enumerate}
+\subsubsection{Objects}
+\label{sec:org6a487d3}
+\begin{enumerate}
+\item Picking Up Objects
+\label{sec:orgd381bee}
+\item Moving Objects
+\label{sec:org730cd22}
+\end{enumerate}
+\subsubsection{Actions}
+\label{sec:org8464467}
+\begin{enumerate}
+\item Switches and Buttons
+\label{sec:org8f03a80}
+\item Picking up, Carrying and Dropping
+\label{sec:orgf217cd4}
+\item Talking
+\label{sec:orge7db481}
+\item Reading
+\label{sec:org5cebd86}
+\end{enumerate}
+\subsubsection{Combat - If there is combat or even conflict, how is this specifically modelled?}
+\label{sec:orgec8a7cf}
+\subsubsection{Economy - What is the exonomy of the game? How does it work?}
+\label{sec:org144a7b0}
+\subsection{Screen Flow}
+\label{sec:org76e3a4c}
+\subsubsection{Screen Flow Chart - A Graphical description of How each screen is related to each other}
+\label{sec:orga5271fc}
+\subsubsection{Screen Descriptions - What is the purpose of each screen?}
+\label{sec:orgcb7af26}
+\begin{enumerate}
+\item Main Menu Screen
+\label{sec:orgbb2c741}
+\item Options Screen
+\label{sec:orgb0c6004}
+\item Etc.
+\label{sec:org7bf9e07}
+\end{enumerate}
+\subsubsection{Game Options - What are the options and how do they affect gameplay and mechanics?}
+\label{sec:orgaa0109a}
+\subsubsection{Replaying and saving}
+\label{sec:org9cce058}
+
+\section{Story, Setting and Character}
+\label{sec:orgd94209c}
+\subsection{Story and Narrative}
+\label{sec:org0c361a4}
+\subsubsection{Back Story}
+\label{sec:org99d40cd}
+\subsubsection{Plot Elements}
+\label{sec:org5b3d337}
+\subsubsection{Game Progression}
+\label{sec:org8243dd7}
+\subsubsection{Cut Scenes}
+\label{sec:org636bd67}
+\begin{enumerate}
+\item Cut scene 1
+\label{sec:org3040d4d}
+\begin{enumerate}
+\item Actors
+\label{sec:orgd47ce13}
+\item Description
+\label{sec:org7693de3}
+\item Storyboard
+\label{sec:org8e16ec0}
+\item Script
+\label{sec:org873ee96}
+\end{enumerate}
+\item Cut scene 2
+\label{sec:org9d07106}
+\item Etc.
+\label{sec:org7361acd}
+\end{enumerate}
+\subsection{Game World}
+\label{sec:orgce45647}
+\subsubsection{Genral look and feel of the world}
+\label{sec:orgc93a775}
+\subsubsection{Area 1}
+\label{sec:orgaadeebf}
+\begin{enumerate}
+\item General Description
+\label{sec:org796ec0f}
+\item Phyical Characteristics
+\label{sec:orgfd9fab3}
+\item Levels that use area
+\label{sec:orgf0eb880}
+\item Connections to other areas
+\label{sec:orgfa9067e}
+\end{enumerate}
+\subsubsection{Area 2}
+\label{sec:orga88d4fe}
+\begin{enumerate}
+\item Etc.
+\label{sec:orga12cd86}
+\end{enumerate}
+\subsection{Characters}
+\label{sec:orgb10fc3b}
+\subsubsection{Character 1}
+\label{sec:org0ee6148}
+\begin{enumerate}
+\item Back Story
+\label{sec:org3cd49f9}
+\item Personality
+\label{sec:org51c817e}
+\item Look
+\label{sec:org769ff2a}
+\begin{enumerate}
+\item Physical Characteristics
+\label{sec:orgbb0ade0}
+\item Animations
+\label{sec:org1cb9045}
+\end{enumerate}
+\item Special Abilities
+\label{sec:orgcf01417}
+\item Relevance to game story
+\label{sec:org7047a71}
+\item Relationship to other characters
+\label{sec:org4a9f279}
+\item Statistics
+\label{sec:org8d5a074}
+\end{enumerate}
+\subsubsection{Character 2}
+\label{sec:orge874286}
+
+\section{Levels}
+\label{sec:org20204b1}
+\subsection{Level 1}
+\label{sec:org26baa69}
+\subsubsection{Synopsis}
+\label{sec:orgd9b5ac3}
+\subsubsection{Introductory Material ( Cut scene? Mission briefing? )}
+\label{sec:orgeb91eac}
+\subsubsection{Objectives}
+\label{sec:org1e7e4a0}
+\subsubsection{Physical Description}
+\label{sec:org7ec03e9}
+\subsubsection{Map}
+\label{sec:orga5f802e}
+\subsubsection{Critial Path}
+\label{sec:org1eb95f1}
+\subsubsection{Encounters}
+\label{sec:org94f24ef}
+\subsubsection{Level Walkthrough}
+\label{sec:org1bfed02}
+\subsubsection{Closing Material}
+\label{sec:org9ab08a9}
+\subsection{Level 2}
+\label{sec:orgd1fcf5e}
+\subsection{Etc.}
+\label{sec:orgb94df7a}
+\subsection{Training Level}
+\label{sec:org8045101}
+
+\section{Interface}
+\label{sec:org4723053}
+\subsection{Visual System}
+\label{sec:org64cfdb4}
+\subsubsection{HUD - What controls}
+\label{sec:org4060648}
+\subsubsection{Menus}
+\label{sec:org0fc22ea}
+\subsubsection{Rendering System}
+\label{sec:orga9f72cd}
+\subsubsection{Camera}
+\label{sec:orgdd8c7b1}
+\subsubsection{Lighting Models}
+\label{sec:orgc630454}
+\subsection{Control System - How does the game player control the game? What are the specific commands?}
+\label{sec:org1316122}
+\subsection{Audio}
+\label{sec:org011bcf2}
+\subsection{Music}
+\label{sec:org32dd5d3}
+\subsection{Sound Effects}
+\label{sec:orgd37d7da}
+\subsection{Help System}
+\label{sec:org43da82c}
+
+\section{Artificial Intelligence}
+\label{sec:orgf27ac17}
+\subsection{Opponent AI - The active opponent that plays against the game player and therefore requires strategic decisions making (example, Civilization or Chess, how is it to be disigned?)}
+\label{sec:org6119ea5}
+\subsection{Enemy AI - Villains and Monsters}
+\label{sec:org68ecf18}
+\subsection{Non-combat Characters}
+\label{sec:org07bfdb8}
+\subsection{Friendly characters}
+\label{sec:org1198f8f}
+\subsection{Support AI}
+\label{sec:orga58f6f6}
+\subsubsection{Player and Collision detection}
+\label{sec:orgc7eb419}
+\subsubsection{Pathfinding}
+\label{sec:org39213e9}
+
+\section{Technical}
+\label{sec:org42b8122}
+\subsection{Target Hardware}
+\label{sec:org831965e}
+\subsection{Development hardware and software}
+\label{sec:org8e3cdd3}
+\subsection{Development procedures and standards}
+\label{sec:org582b00a}
+\subsection{Game Engine}
+\label{sec:org28adf12}
+\subsection{Network}
+\label{sec:orgb8fb21f}
+\subsection{Scripting Language}
+\label{sec:org0220519}
+\subsection{Etc.}
+\label{sec:orgb16d09d}
+
+\section{Game Art}
+\label{sec:org32cb3d3}
+\subsection{Concept Art}
+\label{sec:org7491a6f}
+\subsection{Style Guides}
+\label{sec:orgf31bfb1}
+\subsection{Characters}
+\label{sec:orgf531b6f}
+\subsection{Enviroment}
+\label{sec:org7736a76}
+\subsection{Equipment}
+\label{sec:org7fe7247}
+\subsection{Cut Scenes}
+\label{sec:org1399539}
+\subsection{Miscellaneous}
+\label{sec:org1410570}
+
+\section{Project Management}
+\label{sec:org05f1edb}
+\subsection{Project Methodology: Pick one, justify it, hsow how you plan to tailor it to your project. Do not write in generic terms}
+\label{sec:org6902fc6}
+\subsection{Detailed Schedule: Including major project milestones and sprint deadlines if using an agile-type methodology}
+\label{sec:org0dfc38d}
+\subsection{Schedule Management: Select a tool (such as JIRA, trello, etc.) and justify your selection}
+\label{sec:orged29479}
+\subsection{Version control, Select a tool (such as Git/Github, Unity Collaborate. etc.) and justify your selection}
+\label{sec:org5d37b34}
+\subsection{Risk Analysis}
+\label{sec:org769fb0e}
+\subsection{Test Plan: How will you test your game? How will you playtest your game?}
+\label{sec:org07f38ee}
+
+\section{Appendices}
+\label{sec:org18fa6c6}
+\begin{itemize}
+\item \href{https://github.com/viirret/gdd-template/blob/main/main.tex}{gdd-template/main.tex at main · viirret/gdd-template · GitHub}
+\end{itemize}
+\subsection{Credits: List ALL third-party assets used in your game. Group them according to type:}
+\label{sec:org928bbc0}
+\subsubsection{Images}
+\label{sec:orgad24e9c}
+\subsubsection{Models}
+\label{sec:org634a8f3}
+\subsubsection{Animations}
+\label{sec:org5b017ba}
+\subsubsection{Audio}
+\label{sec:org1f7bed0}
+\subsubsection{Cameras}
+\label{sec:orgc7fbb61}
+\subsubsection{Player controllers}
+\label{sec:org0cbd4ce}
+\subsubsection{Etc.}
+\label{sec:org047b000}
+\subsection{References. Use the Harvard method to format references for all in-text citations}
+\label{sec:orga146072}
+\subsection{Project logs. Weekly/fortnightly log, such as Sprint doc ( if using Scrum ), Trello charts, Youtube vlog, etc.}
+\label{sec:org5a980dd}
+\end{document}

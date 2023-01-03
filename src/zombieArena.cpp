@@ -103,6 +103,24 @@ int main()
 	pausedText.setOrigin(pausedRect.left + pausedRect.width / 2.0f, pausedRect.top + pausedRect.height / 2.0f);
 	pausedText.setPosition(resolution.x / 2, resolution.y / 6);
 
+	// Controls
+	Text controlsText;
+	controlsText.setFont(font);
+	controlsText.setCharacterSize(60);
+	controlsText.setFillColor(Color::White);
+	controlsText.setString("Press Enter \nto continue");
+
+	// Place in middle of screen
+	std::stringstream controlStream;
+	controlStream << "Space\t- Dash"
+				  << "\nF\t\t\t\t- Place turret"
+				  << "\n\nDash through the turret to reload it.";
+	controlsText.setString(controlStream.str());
+
+	FloatRect controlsRect = controlsText.getLocalBounds();
+	controlsText.setOrigin(controlsRect.left + controlsRect.width / 2.0f, controlsRect.top + controlsRect.height / 2.0f);
+	controlsText.setPosition(resolution.x / 2, resolution.y / 2);
+
 	// Game Over
 	Text gameOverText;
 	gameOverText.setFont(font);
@@ -147,7 +165,7 @@ int main()
 	scoreText.setPosition(resolution.x / 2, (resolution.y / 2) - 200);
 
 	// Load the high score from a text file
-	std::ifstream inputFile("gamedate/scores.txt");
+	std::ifstream inputFile("gamedata/scores.txt");
 	if (inputFile.is_open())
 	{
 		inputFile >> hiScore;
@@ -272,8 +290,8 @@ int main()
 				else if (event.key.code == Keyboard::Return && state == State::GAME_OVER)
 				{
 					// Prepare the level – we will update this later
-					rArena.width = 1600;
-					rArena.height = 1600;
+					rArena.width = 160;
+					rArena.height = 160;
 					rArena.left = 0;
 					//int tileSize = 50; // we will update this later
 					rArena.top = 0;
@@ -344,11 +362,10 @@ int main()
 			for (int i = 0; i < numZombies; i++)
 			{
 				// Player is immune while dashing
-				if (player.checkCollision(zombies[i]) && !player.isDashing())
+				if (player.checkCollision(zombies[i]) && !player.isDashing() && zombies[i].isAlive())
 				{
 					player.hit(gameTimeTotal);
 					// Play sound
-					// add point
 				}
 
 				// Loops through all the bullets for each zombie and check for collision
@@ -361,13 +378,14 @@ int main()
 					if (zombies[i].checkCollision(turret.getBullet(j)))
 					{
 						// Play sound
+						// hit.play();
 						zombies[i].hit();
 					}
 				}
 			} // End zombies for loop
 
 			// check for collision with Turret
-			if (player.checkCollision(turret))
+			if (player.checkCollision(turret) && player.isDashing())
 			{
 				// reload turret when dashed through
 				// TODO if player had enough points refil turrets ammo
@@ -394,6 +412,11 @@ int main()
 				outputFile.close();
 			}
 		} // End handle collision
+
+		if (score % 10 && score)
+		{
+			state = State::LEVELING_UP;
+		}
 
 		// Handle the player quitting
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -544,34 +567,34 @@ int main()
 			// player.update(dtAsSeconds, Mouse::getPosition());
 			player.update(dtAsSeconds);
 
-			// turret.update(zombies[1].getCenter());
-
 			// Make a note of the players new position
 			Vector2f playerPosition(player.getCenter());
+			turret.update(gameTimeTotal, playerPosition);
 
 			// Make the view centre around the player
 			mainView.setCenter(playerPosition);
 
 			// Convert mouse position to world coordinates of mainView
 			// Loop through each Zombie and update them if alive
-			bool hasTarget = false;
+			// bool hasTarget = false;
 			for (int i = 0; i < numZombies; i++)
 			{
 				if (zombies[i].isAlive())
 				{
-					zombies[i].update(dt.asSeconds(), playerPosition);
-					if (hasTarget)
-						break;
-					hasTarget = true;
-					// FloatRect zombieWorldPosition = zombies[i].getPosition();
-					// Vector2f zombieWorldPosition = window.mapPixelToCoords(zombies[i].getCenter());
-					// turret.update(zombieWorldPosition);
-					turret.update(gameTimeTotal, zombies[i].getCenter());
+					zombies[i].update(dtAsSeconds, playerPosition);
+					// if (hasTarget)
+					// 	continue;
+					// hasTarget = true;
+					// turret.update(gameTimeTotal, zombies[i].getCenter());
 				}
-				// else if (hasTarget)
+				// if (zombies[i].isAlive() && hasTarget)
+				// {
+				// turret.update(gameTimeTotal, zombies[i].getCenter());
+				// hasTarget = false;
+				// }
 				else
 				{
-					hasTarget = false;
+					// hasTarget = false;
 				}
 			}
 
@@ -677,6 +700,7 @@ int main()
 		if (state == State::PAUSED)
 		{
 			window.draw(pausedText);
+			window.draw(controlsText);
 		}
 
 		if (state == State::GAME_OVER)

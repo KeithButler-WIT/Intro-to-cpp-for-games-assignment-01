@@ -9,6 +9,7 @@ Turret::Turret()
 	m_Damage = START_DAMAGE;
 	m_BulletsSpare = START_MAX_BULLETS;
 	m_FireRate = START_FIRE_RATE;
+	m_CurrentBullet = 0;
 
 	// Associate a texture with the sprite
 	Entity::setSprite(Sprite(TextureHolder::GetTexture("content/graphics/Tiles/tile_0074.png")));
@@ -47,7 +48,6 @@ void Turret::resetTurretStats()
 	m_FireRate = START_FIRE_RATE;
 }
 
-// void Turret::update(Vector2i targetPosition)
 void Turret::update(Time gameTimeTotal, Vector2f targetPosition)
 {
 	// Calculate the angle to face the enemy
@@ -58,11 +58,12 @@ void Turret::update(Time gameTimeTotal, Vector2f targetPosition)
 
 	Entity::m_Sprite.setRotation(angle);
 
+	// adds a delay between each shot fired
 	if (gameTimeTotal.asMilliseconds() - lastShotTime.asMilliseconds() > 1000 / m_FireRate && m_BulletsSpare > 0)
 	{
 		// Pass the centre of the turret and the centre of the target to the shoot function
 		m_Bullets[m_CurrentBullet].shoot(Entity::getCenter().x, Entity::getCenter().y, targetPosition.x, targetPosition.y);
-		m_Bullets[m_CurrentBullet].getSprite().setRotation(angle);
+		// m_Bullets[m_CurrentBullet].getSprite().setRotation(angle);
 		m_CurrentBullet++;
 
 		if (m_CurrentBullet > START_MAX_BULLETS)

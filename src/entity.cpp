@@ -44,6 +44,7 @@ void Entity::setSprite(Sprite sprite)
 	m_Sprite = sprite;
 }
 
+// return true if intersecting with an entity
 bool Entity::checkCollision(Entity obj)
 {
 	m_Collision = false; // defaults to no collision at first
