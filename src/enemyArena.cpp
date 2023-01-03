@@ -569,7 +569,7 @@ int main()
 
 			// Make a note of the players new position
 			Vector2f playerPosition(player.getCenter());
-			turret.update(gameTimeTotal, playerPosition);
+			// turret.update(gameTimeTotal, playerPosition);
 
 			// Make the view centre around the player
 			mainView.setCenter(playerPosition);
@@ -585,7 +585,7 @@ int main()
 					// if (hasTarget)
 					// 	continue;
 					// hasTarget = true;
-					// turret.update(gameTimeTotal, enemys[i].getCenter());
+					turret.update(gameTimeTotal, enemys[i].getCenter());
 				}
 				// if (enemys[i].isAlive() && hasTarget)
 				// {
