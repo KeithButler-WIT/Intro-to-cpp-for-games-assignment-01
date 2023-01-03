@@ -1,4 +1,4 @@
-#include "zombieArena.h"
+#include "enemyArena.h"
 #include <SFML/Graphics.hpp>
 
 int createBackground(VertexArray& rVA, IntRect& arena)

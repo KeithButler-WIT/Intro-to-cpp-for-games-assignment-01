@@ -1,10 +1,10 @@
-#include "zombie.h"
+#include "enemy.h"
 #include "textureHolder.h"
 #include <cstdlib>
 #include <ctime>
 #include <math.h> /* atan2 */
 
-void Zombie::spawn(float startX, float startY, int type, int seed)
+void Enemy::spawn(float startX, float startY, int type, int seed)
 {
 	switch (type)
 	{
@@ -33,7 +33,7 @@ void Zombie::spawn(float startX, float startY, int type, int seed)
 			break;
 	}
 
-	// Prevent zombies from bunching
+	// Prevent enemys from bunching
 	srand((int)time(0) * seed);
 	// Somewhere between 70 and 100
 	float modifier = (rand() % MAX_VARIANCE) + OFFSET;
@@ -48,13 +48,13 @@ void Zombie::spawn(float startX, float startY, int type, int seed)
 	m_Sprite.setPosition(m_Position);
 }
 
-bool Zombie::hit()
+bool Enemy::hit()
 {
 	m_Health--;
 
 	if (m_Health < 0)
 	{
-		// if the zombie is dead
+		// if the enemy is dead
 		m_Alive = false;
 		m_Sprite.setTexture(TextureHolder::GetTexture("content/graphics/Tiles/tile_0064.png"));
 
@@ -65,17 +65,17 @@ bool Zombie::hit()
 	return false;
 }
 
-bool Zombie::isAlive()
+bool Enemy::isAlive()
 {
 	return m_Alive;
 }
 
-void Zombie::update(float elapsedTime, Vector2f playerLocation)
+void Enemy::update(float elapsedTime, Vector2f playerLocation)
 {
 	float playerX = playerLocation.x + 16.0f;
 	float playerY = playerLocation.y + 16.0f;
 
-	// Update the zombie position variables
+	// Update the enemy position variables
 	if (playerX > m_Position.x)
 	{
 		m_Position.x = m_Position.x + m_Speed * elapsedTime;

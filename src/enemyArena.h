@@ -1,7 +1,7 @@
 #pragma once
-#include "zombie.h"
+#include "enemy.h"
 
 using namespace sf;
 
 int createBackground(VertexArray& rVA, IntRect& arena);
-Zombie* createHorde(int numZombies, IntRect& arena);
+Enemy* createHorde(int numEnemys, IntRect& arena);

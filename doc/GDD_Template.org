@@ -89,7 +89,7 @@ Top down wave survival shooter
 
 Main target audiences of the game and reasoning why game attracts certain audiences.
 ** Game Flow Summary - How does the player move through the game? Both through framing interface and the game itself.
-The player can explore a large flat arena.
+The player can explore a large flat arena all while evading enemy attacks.
 ** Look and Feel
 Pixel art graphics.
 ** Project Scope
@@ -104,11 +104,11 @@ What makes this game stand out?
 
 * Gameplay and mechanics
 ** Gameplay
+Turret Divert is an endless wave survival, where the player has to use a limited number turrets that they can place to attack the enemies for them.
+The player don't not have direct control over attacking the player.
 *** Game Progression
 *** Objectives
 Survive for as long as possible.
-*** Play Flow - How does the game flow for the game player
-The player
 ** Mechanics
 *** Physics - How does the physical universe work?
 *** Movement
@@ -120,8 +120,10 @@ WASD controls
 ***** Keybinding : SPACE
 
 *** Objects
-**** Picking Up Objects
-**** Moving Objects
+**** Placing the turrets
+Only a set number of turrets can be placed at any one time.
+Can be increased as a level up option.
+***** Keybinding : F
 *** Actions
 **** Switches and Buttons
 **** Picking up, Carrying and Dropping
@@ -136,6 +138,7 @@ Player dosen't have direct control over attacking the enemies.
 **** Etc.
 *** Game Options - What are the options and how do they affect gameplay and mechanics?
 *** Replaying and saving
+Hiscore is carried over between games.
 
 * Story, Setting and Character
 ** Game World

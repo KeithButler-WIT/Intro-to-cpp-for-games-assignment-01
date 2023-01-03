@@ -1,19 +1,19 @@
-#include "zombie.h"
-#include "zombieArena.h"
+#include "enemy.h"
+#include "enemyArena.h"
 
-Zombie* createHorde(int numZombies, IntRect& arena)
+Enemy* createHorde(int numEnemys, IntRect& arena)
 {
-	Zombie* zombies = new Zombie[numZombies];
+	Enemy* enemys = new Enemy[numEnemys];
 
 	int maxY = arena.height - 20;
 	int minY = arena.top + 20;
 	int maxX = arena.width - 20;
 	int minX = arena.left + 20;
 
-	for (int i = 0; i < numZombies; i++)
+	for (int i = 0; i < numEnemys; i++)
 	{
 
-		// Which side should the zombie spawn
+		// Which side should the enemy spawn
 		int side = (rand() % 4);
 		float x = 0, y = 0;
 
@@ -49,8 +49,8 @@ Zombie* createHorde(int numZombies, IntRect& arena)
 		// Bloater, crawler or runner
 		int type = (rand() % 3);
 
-		// Spawn the new zombie into the array
-		zombies[i].spawn(x, y, type, i);
+		// Spawn the new enemy into the array
+		enemys[i].spawn(x, y, type, i);
 	}
-	return zombies;
+	return enemys;
 }

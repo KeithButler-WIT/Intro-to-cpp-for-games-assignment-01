@@ -4,7 +4,7 @@
 
 Turret::Turret()
 {
-	Time currentShotTime;
+	// Time currentShotTime;
 	Time lastShotTime;
 	m_Damage = START_DAMAGE;
 	m_BulletsSpare = START_MAX_BULLETS;
@@ -14,6 +14,9 @@ Turret::Turret()
 	// Associate a texture with the sprite
 	Entity::setSprite(Sprite(TextureHolder::GetTexture("content/graphics/Tiles/tile_0074.png")));
 	Entity::m_Sprite = Entity::getSprite();
+
+	Entity::m_Position.x = 0;
+	Entity::m_Position.y = 0;
 
 	// Set the origin of the sprite to the centre for smooth rotation
 	Entity::m_Sprite.setOrigin(8, 8);

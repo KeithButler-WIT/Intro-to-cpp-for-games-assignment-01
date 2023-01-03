@@ -1,4 +1,4 @@
-#include "zombieArena.h"
+#include "enemyArena.h"
 #include "player.h"
 #include "textureHolder.h"
 #include "turret.h"
@@ -57,10 +57,10 @@ int main()
 	// Load the texture for our background vertex array
 	Texture textureBackground = TextureHolder::GetTexture("content/graphics/Tiles/tile_background.png");
 
-	// Prepare for a horde of zombies
-	int numZombies = 0;		 // Number at start of wave
-	int numZombiesAlive = 0; // Number to be killed
-	Zombie* zombies = nullptr;
+	// Prepare for a horde of enemys
+	int numEnemys = 0;		// Number at start of wave
+	int numEnemysAlive = 0; // Number to be killed
+	Enemy* enemys = nullptr;
 
 	int score = 0;
 	int hiScore = 0;
@@ -182,13 +182,13 @@ int main()
 	s << "Hi Score:" << hiScore;
 	hiScoreText.setString(s.str());
 
-	// Zombies remaining
-	Text zombiesRemainingText;
-	zombiesRemainingText.setFont(font);
-	zombiesRemainingText.setCharacterSize(55);
-	zombiesRemainingText.setFillColor(Color::White);
-	zombiesRemainingText.setPosition(resolution.x - 200, resolution.y - 200);
-	zombiesRemainingText.setString("Zombies: 100");
+	// Enemys remaining
+	Text enemysRemainingText;
+	enemysRemainingText.setFont(font);
+	enemysRemainingText.setCharacterSize(55);
+	enemysRemainingText.setFillColor(Color::White);
+	enemysRemainingText.setPosition(resolution.x - 200, resolution.y - 200);
+	enemysRemainingText.setString("Enemys: 100");
 
 	// Wave number
 	int wave = 0;
@@ -308,13 +308,13 @@ int main()
 					turret.resetBullets();
 					turret.resetTurretStats();
 
-					// Create a horde of zombies
-					numZombies = 20 * wave;
+					// Create a horde of enemys
+					numEnemys = 20 * wave;
 
 					// Delete the previously allocated memory (if it exists)
-					delete[] zombies; // Note use of delete[] – should use [] when deleting arrays from heap.
-					zombies = createHorde(numZombies, rArena);
-					numZombiesAlive = numZombies;
+					delete[] enemys; // Note use of delete[] – should use [] when deleting arrays from heap.
+					enemys = createHorde(numEnemys, rArena);
+					numEnemysAlive = numEnemys;
 
 					// Reset the clock so there isn't a frame jump
 					clock.restart();
@@ -332,10 +332,10 @@ int main()
 						// Play sound
 						// BUG holding space gives infinite dash
 
-						// check for collision with a zombie
-						for (int i = 0; i < numZombies; i++)
+						// check for collision with a enemy
+						for (int i = 0; i < numEnemys; i++)
 						{
-							if (player.checkCollision(zombies[i]))
+							if (player.checkCollision(enemys[i]))
 							{
 								// Play sound
 								// add point
@@ -359,30 +359,30 @@ int main()
 		// Handle Collisions while Playing
 		if (state == State::PLAYING)
 		{
-			for (int i = 0; i < numZombies; i++)
+			for (int i = 0; i < numEnemys; i++)
 			{
 				// Player is immune while dashing
-				if (player.checkCollision(zombies[i]) && !player.isDashing() && zombies[i].isAlive())
+				if (player.checkCollision(enemys[i]) && !player.isDashing() && enemys[i].isAlive())
 				{
 					player.hit(gameTimeTotal);
 					// Play sound
 				}
 
-				// Loops through all the bullets for each zombie and check for collision
+				// Loops through all the bullets for each enemy and check for collision
 				for (int j = 0; j < 100; j++)
 				{
 					// Skip checking collision if bullet is not moving
 					if (turret.getBullet(j).isInFlight())
 						continue;
 
-					if (zombies[i].checkCollision(turret.getBullet(j)))
+					if (enemys[i].checkCollision(turret.getBullet(j)))
 					{
 						// Play sound
 						// hit.play();
-						zombies[i].hit();
+						enemys[i].hit();
 					}
 				}
-			} // End zombies for loop
+			} // End enemys for loop
 
 			// check for collision with Turret
 			if (player.checkCollision(turret) && player.isDashing())
@@ -526,13 +526,13 @@ int main()
 				// Increaes the wave number
 				wave++;
 
-				// // Create a horde of zombies
-				// numZombies = 20 * wave;
+				// // Create a horde of enemys
+				// numEnemys = 20 * wave;
 
 				// // Delete the previously allocated memory (if it exists)
-				// delete[] zombies; // Note use of delete[] – should use [] when deleting arrays from heap.
-				// zombies = createHorde(numZombies, rArena);
-				// numZombiesAlive = numZombies;
+				// delete[] enemys; // Note use of delete[] – should use [] when deleting arrays from heap.
+				// enemys = createHorde(numEnemys, rArena);
+				// numEnemysAlive = numEnemys;
 
 				// Reset the clock so there isn't a frame jump
 				clock.restart();
@@ -575,21 +575,21 @@ int main()
 			mainView.setCenter(playerPosition);
 
 			// Convert mouse position to world coordinates of mainView
-			// Loop through each Zombie and update them if alive
+			// Loop through each Enemy and update them if alive
 			// bool hasTarget = false;
-			for (int i = 0; i < numZombies; i++)
+			for (int i = 0; i < numEnemys; i++)
 			{
-				if (zombies[i].isAlive())
+				if (enemys[i].isAlive())
 				{
-					zombies[i].update(dtAsSeconds, playerPosition);
+					enemys[i].update(dtAsSeconds, playerPosition);
 					// if (hasTarget)
 					// 	continue;
 					// hasTarget = true;
-					// turret.update(gameTimeTotal, zombies[i].getCenter());
+					// turret.update(gameTimeTotal, enemys[i].getCenter());
 				}
-				// if (zombies[i].isAlive() && hasTarget)
+				// if (enemys[i].isAlive() && hasTarget)
 				// {
-				// turret.update(gameTimeTotal, zombies[i].getCenter());
+				// turret.update(gameTimeTotal, enemys[i].getCenter());
 				// hasTarget = false;
 				// }
 				else
@@ -619,7 +619,7 @@ int main()
 				std::stringstream ssScore;
 				std::stringstream ssHiScore;
 				std::stringstream ssWave;
-				std::stringstream ssZombiesAlive;
+				std::stringstream ssEnemysAlive;
 
 				// Update the score text
 				ssScore << "Score:" << score;
@@ -633,9 +633,9 @@ int main()
 				ssWave << "Wave:" << wave;
 				waveNumberText.setString(ssWave.str());
 
-				// Update the Zombies text
-				ssZombiesAlive << "Zombies:" << numZombiesAlive;
-				zombiesRemainingText.setString(ssZombiesAlive.str());
+				// Update the Enemys text
+				ssEnemysAlive << "Enemys:" << numEnemysAlive;
+				enemysRemainingText.setString(ssEnemysAlive.str());
 
 				framesSinceLastHUDUpdate = 0;
 			}
@@ -659,10 +659,10 @@ int main()
 			// Draw the background
 			window.draw(background, &textureBackground);
 
-			// Draw the zombies
-			for (int i = 0; i < numZombies; i++)
+			// Draw the enemys
+			for (int i = 0; i < numEnemys; i++)
 			{
-				window.draw(zombies[i].getSprite());
+				window.draw(enemys[i].getSprite());
 			}
 
 			// Draw the bullets
@@ -688,7 +688,7 @@ int main()
 			// Draw all the HUD elements
 			window.draw(healthBar);
 			// window.draw(waveNumberText);
-			// window.draw(zombiesRemainingText);
+			// window.draw(enemysRemainingText);
 		}
 
 		if (state == State::LEVELING_UP)
@@ -715,7 +715,7 @@ int main()
 	}
 
 	// Delete the previously allocated memory (if it exists)
-	delete[] zombies;
+	delete[] enemys;
 
 	return 0;
 }
