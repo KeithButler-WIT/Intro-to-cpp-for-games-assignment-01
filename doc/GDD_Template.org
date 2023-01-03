@@ -32,10 +32,8 @@
 - [[#title-page][Title Page]]
 - [[#game-overview][Game Overview]]
   - [[#concept][Concept]]
-  - [[#feature-set][Feature Set]]
   - [[#genres][Genres]]
-  - [[#target-audience][Target Audience]]
-  - [[#game-flow-summary---how-does-the-player-move-through-the-game-both-through-framing-interface-and-the-game-itself][Game Flow Summary - How does the player move through the game? Both through framing interface and the game itself.]]
+  - [[#game-flow-summary][Game Flow Summary]]
   - [[#look-and-feel][Look and Feel]]
   - [[#project-scope][Project Scope]]
   - [[#unique-selling-point][Unique Selling Point]]
@@ -43,14 +41,8 @@
   - [[#gameplay][Gameplay]]
   - [[#mechanics][Mechanics]]
   - [[#screen-flow][Screen Flow]]
-- [[#story-setting-and-character][Story, Setting and Character]]
-  - [[#game-world][Game World]]
-  - [[#characters][Characters]]
-- [[#levels][Levels]]
-  - [[#level-1][Level 1]]
 - [[#interface][Interface]]
   - [[#visual-system][Visual System]]
-  - [[#control-system---how-does-the-game-player-control-the-game-what-are-the-specific-commands][Control System - How does the game player control the game? What are the specific commands?]]
   - [[#audio][Audio]]
   - [[#music][Music]]
   - [[#sound-effects][Sound Effects]]
@@ -62,126 +54,74 @@
   - [[#development-hardware-and-software][Development hardware and software]]
   - [[#development-procedures-and-standards][Development procedures and standards]]
   - [[#scripting-language][Scripting Language]]
-- [[#game-art][Game Art]]
-  - [[#concept-art][Concept Art]]
-  - [[#style-guides][Style Guides]]
-  - [[#characters-1][Characters]]
-  - [[#enviroment][Enviroment]]
-  - [[#equipment][Equipment]]
-  - [[#cut-scenes][Cut Scenes]]
-  - [[#miscellaneous][Miscellaneous]]
 - [[#project-management][Project Management]]
   - [[#version-control][Version control]]
-  - [[#test-plan][Test Plan]]
 - [[#appendices][Appendices]]
-  - [[#credits-list-all-third-party-assets-used-in-your-game-group-them-according-to-type][Credits: List ALL third-party assets used in your game. Group them according to type:]]
-  - [[#art][Art]]
-  - [[#references-use-the-harvard-method-to-format-references-for-all-in-text-citations][References. Use the Harvard method to format references for all in-text citations]]
+  - [[#credits][Credits:]]
 
 * Game Overview
 # The very basic idea of the game
 ** Concept
 An endless wave survival where the player cannot directly control attacking the enemies and has to rely on turrets to kill the enemies.
-** Feature Set
 ** Genres
 Top down wave survival shooter
-** Target Audience
-
-Main target audiences of the game and reasoning why game attracts certain audiences.
-** Game Flow Summary - How does the player move through the game? Both through framing interface and the game itself.
-The player can explore a large flat arena all while evading enemy attacks.
+** Game Flow Summary
+The player dodges and dashed through large hordes of enemies all while exploring a large flat arena.
 ** Look and Feel
 Pixel art graphics.
 ** Project Scope
-*** 1 location
 *** 1 level
 *** No NPC's
 *** One kind of turret
 *** Player has no access to weapons and is out of control of attacking any enemies.
 
 ** Unique Selling Point
-What makes this game stand out?
-
 * Gameplay and mechanics
 ** Gameplay
-Turret Divert is an endless wave survival, where the player has to use a limited number turrets that they can place to attack the enemies for them.
-The player don't not have direct control over attacking the player.
-*** Game Progression
-*** Objectives
-Survive for as long as possible.
+Turret Divert is an endless wave survival, where the player has to survive for as long as possible by using a limited number turrets that they can place to attack the enemies for them.
+
+The player character can be controlled by simply using a keyboard and mouse.
+
+The player don't not have direct control over attacking the player and has to use skillfully evade and dodge enemy attacks while directing the enemies into the turrets line of fire.
 ** Mechanics
-*** Physics - How does the physical universe work?
 *** Movement
 **** General Movement
-WASD controls
+WASD controls.
 **** Dash
 - The players main form of movement.
 - Can dash through enemies without taking damage.
+- When the player dashs through a turret the turret gets reloaded.
 ***** Keybinding : SPACE
 
-*** Objects
-**** Placing the turrets
+*** Placing the turrets
 Only a set number of turrets can be placed at any one time.
 Can be increased as a level up option.
-***** Keybinding : F
-*** Actions
-**** Switches and Buttons
-**** Picking up, Carrying and Dropping
-*** Combat
-Player dosen't have direct control over attacking the enemies.
+**** Keybinding : F
 
 ** Screen Flow
-*** Screen Flow Chart - A Graphical description of How each screen is related to each other
-*** Screen Descriptions - What is the purpose of each screen?
+*** Screen Flow Chart
+Main Menu -> Game Screen -> Game Over Screen
+                  |
+             Paused Menu
+*** Screen Descriptions
 **** Main Menu Screen
-**** Options Screen
-**** Etc.
-*** Game Options - What are the options and how do they affect gameplay and mechanics?
+Loads the player into the main game by pressing the space key.
+**** Pause Screen
+Shows the controls for the game.
+Can be opened at any moment my pressing the space key.
+**** Game Over Screen
+Displays the stats from the game.
+Such as total kills, high score and player level.
 *** Replaying and saving
-Hiscore is carried over between games.
+The high score is carried over between games.
 
-* Story, Setting and Character
-** Game World
-*** Genral look and feel of the world
-*** Area 1
-**** General Description
-**** Phyical Characteristics
-**** Levels that use area
-**** Connections to other areas
-** Characters
-*** Character 1
-**** Back Story
-**** Personality
-**** Look
-***** Physical Characteristics
-***** Animations
-**** Special Abilities
-**** Relevance to game story
-**** Relationship to other characters
-**** Statistics
-
-* Levels
-** Level 1
-*** Synopsis
-*** Introductory Material ( Cut scene? Mission briefing? )
-*** Objectives
-Survive for as long as possible against waves of enemies.
-*** Physical Description
-*** Map
-*** Critial Path
-*** Encounters
-*** Level Walkthrough
-*** Closing Material
 * Interface
 ** Visual System
-*** HUD - What controls
-*** Menus
-*** Rendering System
+*** HUD
+Player health bar is displayed directly below the player sprite.
 *** Camera
-*** Lighting Models
-** Control System - How does the game player control the game? What are the specific commands?
+Player centered camera.
 ** Audio
-
 ** Music
 ** Sound Effects
 
@@ -198,28 +138,11 @@ The active opponent that chases down the player on mass and therefore requires s
 ** Scripting Language
 C++
 SFML
-* Game Art
-** Concept Art
-** Style Guides
-** Characters
-** Enviroment
-** Equipment
-** Cut Scenes
-** Miscellaneous
-
 * Project Management
 ** Version control
 Git/Github
-** Test Plan
 * Appendices
-- [[https://github.com/viirret/gdd-template/blob/main/main.tex][gdd-template/main.tex at main · viirret/gdd-template · GitHub]]
-** Credits: List ALL third-party assets used in your game. Group them according to type:
-*** Images
-*** Models
-*** Animations
+** Credits:
+*** Art/Sprites
+https://www.kenney.nl/assets/tiny-dungeon
 *** Audio
-*** Cameras
-*** Player controllers
-*** Etc.
-** Art
-** References. Use the Harvard method to format references for all in-text citations
