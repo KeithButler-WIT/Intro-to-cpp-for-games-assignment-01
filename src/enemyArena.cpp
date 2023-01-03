@@ -290,8 +290,8 @@ int main()
 				else if (event.key.code == Keyboard::Return && state == State::GAME_OVER)
 				{
 					// Prepare the level – we will update this later
-					rArena.width = 160;
-					rArena.height = 160;
+					rArena.width = 1600;
+					rArena.height = 1600;
 					rArena.left = 0;
 					//int tileSize = 50; // we will update this later
 					rArena.top = 0;
